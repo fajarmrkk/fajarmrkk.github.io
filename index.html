@@ -45,7 +45,7 @@
             overflow-x: hidden;
         }
 
-        /* Animasi Background Coding */
+        /* Animasi Background Coding - IMPROVED */
         .code-background {
             position: fixed;
             top: 0;
@@ -53,31 +53,81 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.05;
+            opacity: 0.1; /* Increased opacity for better visibility */
             pointer-events: none;
+            overflow: hidden;
         }
 
         .code-line {
             position: absolute;
             font-family: 'Courier New', monospace;
-            font-size: 14px;
-            color: #ffffff;
+            font-size: 16px; /* Slightly larger font */
+            color: rgba(255, 255, 255, 0.8); /* Brighter color with transparency */
             white-space: nowrap;
-            animation: codeFlow 20s linear infinite;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Glow effect */
+            animation: codeFlow 25s linear infinite;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.1); /* Subtle background for better contrast */
+        }
+
+        /* Different animation speeds for variety */
+        .code-line:nth-child(odd) {
+            animation-duration: 30s;
+            animation-delay: -5s;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .code-line:nth-child(even) {
+            animation-duration: 35s;
+            animation-delay: -10s;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .code-line:nth-child(3n) {
+            animation-duration: 40s;
+            animation-delay: -15s;
+            color: rgba(255, 255, 255, 0.6);
         }
 
         @keyframes codeFlow {
             0% {
                 transform: translateX(-100%);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
             }
             100% {
                 transform: translateX(100vw);
+                opacity: 0;
+            }
+        }
+
+        /* Additional animation for vertical movement */
+        @keyframes floatVertical {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
             }
         }
 
         body.dark-mode {
             background: linear-gradient(135deg, #475569 0%, #334155 100%);
             color: var(--text-dark);
+        }
+
+        /* Dark mode adjustments for code background */
+        body.dark-mode .code-line {
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+            background: rgba(0, 0, 0, 0.2);
         }
 
         .container {
@@ -622,6 +672,12 @@
                 width: 40px;
                 height: 40px;
             }
+            
+            /* Adjust code background for mobile */
+            .code-line {
+                font-size: 14px;
+                opacity: 0.8;
+            }
         }
 
         /* Tablet-specific improvements */
@@ -703,7 +759,7 @@
     </style>
 </head>
 <body>
-    <!-- Background Animation -->
+    <!-- Background Animation - IMPROVED -->
     <div class="code-background" id="codeBackground"></div>
     
     <div class="container">
@@ -947,7 +1003,7 @@
             }, 100);
         });
 
-        // Create coding background animation
+        // Create coding background animation - IMPROVED
         function createCodeBackground() {
             const codeBackground = document.getElementById('codeBackground');
             const codeSnippets = [
@@ -974,16 +1030,36 @@
                 '];',
                 'for (let tech of technologies) {',
                 'master(tech);',
-                '}'
+                '}',
+                '// Debugging is like being a detective',
+                'function findBug() {',
+                'console.log("Searching...");',
+                'return bugFound ? fix() : continueSearch();',
+                '}',
+                'while (true) {',
+                'learnNewSkill();',
+                'improveCode();',
+                '}',
+                '// Always learning, always coding',
+                'const passion = "Technology";',
+                'const goal = "Help others";'
             ];
 
-            // Create multiple lines of code
-            for (let i = 0; i < 15; i++) {
+            // Create more lines of code for better effect
+            for (let i = 0; i < 25; i++) {
                 const codeLine = document.createElement('div');
                 codeLine.className = 'code-line';
                 codeLine.textContent = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
                 codeLine.style.top = `${Math.random() * 100}%`;
-                codeLine.style.animationDelay = `${Math.random() * 20}s`;
+                codeLine.style.animationDelay = `${Math.random() * 30}s`;
+                codeLine.style.left = `${Math.random() * 10}%`; // Random horizontal starting position
+                
+                // Add slight vertical animation for some lines
+                if (i % 4 === 0) {
+                    codeLine.style.animation = `codeFlow 25s linear infinite, floatVertical 8s ease-in-out infinite`;
+                    codeLine.style.animationDelay = `${Math.random() * 30}s, ${Math.random() * 8}s`;
+                }
+                
                 codeBackground.appendChild(codeLine);
             }
         }
