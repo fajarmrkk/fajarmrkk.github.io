@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Fajar Rahmadhan - Teknisi HP & Developer</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
         /* Reset CSS */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
         
-        /* Variabel CSS */
+        /* Variabel CSS - Dark mode sebagai default */
         :root {
             --primary-color: #2563eb;
             --secondary-color: #7c3aed;
@@ -25,6 +32,23 @@
             --accent-color: #06d6a0;
             --card-bg: rgba(255, 255, 255, 0.1);
             --transition: all 0.3s ease;
+            --header-bg: rgba(15, 23, 42, 0.9);
+            --nav-link-hover: var(--accent-color);
+            --contact-item-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        body.light {
+            --primary-color: #2563eb;
+            --secondary-color: #7c3aed;
+            --dark-bg: #f8fafc;
+            --light-bg: #0f172a;
+            --text-dark: #1e293b;
+            --text-light: #0f172a;
+            --accent-color: #06d6a0;
+            --card-bg: rgba(0, 0, 0, 0.05);
+            --header-bg: rgba(248, 250, 252, 0.9);
+            --nav-link-hover: var(--primary-color);
+            --contact-item-bg: rgba(0, 0, 0, 0.05);
         }
         
         /* Dasar Styling */
@@ -34,8 +58,14 @@
             color: var(--text-light);
             background-color: var(--dark-bg);
             overflow-x: hidden;
+            transition: background-color 0.6s ease, color 0.6s ease;
         }
         
+        body.light {
+            color: var(--text-light);
+            background-color: var(--dark-bg);
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -50,6 +80,14 @@
             font-weight: 700;
             line-height: 1.2;
             margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        
+        body.light h1,
+        body.light h2,
+        body.light h3,
+        body.light h4 {
+            color: var(--text-dark);
         }
         
         h1 {
@@ -78,6 +116,11 @@
         p {
             margin-bottom: 1.5rem;
             font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+        
+        body.light p {
+            color: #334155;
         }
         
         .btn {
@@ -92,11 +135,33 @@
             cursor: pointer;
             transition: var(--transition);
             box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            user-select: none;
+            position: relative;
+            overflow: hidden;
         }
         
         .btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        /* Button wave animation on click */
+        .btn:after {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.3s ease;
+        }
+        .btn:active:after {
+            transform: translate(-50%, -50%) scale(1);
+            transition: 0s;
         }
         
         .btn-outline {
@@ -117,20 +182,25 @@
             left: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(15, 23, 42, 0.9);
+            background: var(--header-bg);
             backdrop-filter: blur(10px);
             transition: var(--transition);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            height: 70px;
         }
         
         header.scrolled {
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            background: var(--header-bg);
         }
         
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            width: 100%;
         }
         
         .logo {
@@ -138,8 +208,13 @@
             font-weight: 700;
             color: white;
             text-decoration: none;
+            user-select: none;
         }
         
+        body.light .logo {
+            color: var(--text-dark);
+        }
+
         .logo span {
             color: var(--accent-color);
         }
@@ -159,10 +234,15 @@
             font-weight: 500;
             transition: var(--transition);
             position: relative;
+            user-select: none;
+        }
+        
+        body.light .nav-links a {
+            color: var(--text-dark);
         }
         
         .nav-links a:hover {
-            color: var(--accent-color);
+            color: var(--nav-link-hover);
         }
         
         .nav-links a:after {
@@ -184,15 +264,56 @@
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
+            color: var(--text-light);
+            user-select: none;
+            transition: var(--transition);
         }
         
-        /* Hero Section - IMPROVED */
+        body.light .menu-toggle {
+            color: var(--text-dark);
+        }
+
+        /* Dark mode toggle button */
+        .dark-toggle {
+            margin-left: 20px;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.6rem;
+            user-select: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+        body.light .dark-toggle {
+            color: var(--text-dark);
+        }
+        .dark-toggle:focus {
+            outline: none;
+        }
+
+        /* Adding bounce animation for toggle icon */
+        @keyframes bounceToggle {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-5px);
+          }
+        }
+        .dark-toggle:hover {
+          animation: bounceToggle 0.6s infinite;
+        }
+
+        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             position: relative;
             padding-top: 80px;
+            user-select: none;
         }
         
         .hero-content {
@@ -209,6 +330,9 @@
             font-size: 1.2rem;
             margin-bottom: 2rem;
             color: #cbd5e1;
+        }
+        body.light .hero p {
+            color: #334155;
         }
         
         .hero-btns {
@@ -240,6 +364,7 @@
                 0 0 60px rgba(37, 99, 235, 0.4);
             transition: var(--transition);
             animation: float 6s ease-in-out infinite;
+            user-select: none;
         }
         
         .hero-image img:hover {
@@ -259,9 +384,14 @@
             }
         }
         
+        /* Other sections reuse original styles with color variables */
+        
         /* About Section */
         .about {
             background: rgba(30, 41, 59, 0.3);
+        }
+        body.light .about {
+            background: rgba(240, 242, 245, 0.7);
         }
         
         .about-content {
@@ -283,6 +413,10 @@
             max-width: 100%;
             border-radius: 20px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+        body.light .about-image img {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
         }
         
         .skills {
@@ -298,6 +432,13 @@
             border-radius: 50px;
             font-size: 0.9rem;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            user-select: none;
+        }
+        body.light .skill {
+            background: var(--card-bg);
+            color: var(--text-dark);
+            border: 1px solid rgba(30, 41, 59, 0.2);
         }
         
         /* Services Section */
@@ -314,6 +455,13 @@
             text-align: center;
             transition: var(--transition);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            user-select: none;
+        }
+        body.light .service-card {
+            background: var(--card-bg);
+            color: var(--text-dark);
+            border: 1px solid rgba(30, 41, 59, 0.2);
         }
         
         .service-card:hover {
@@ -335,6 +483,11 @@
         /* Portfolio Section */
         .portfolio {
             background: rgba(30, 41, 59, 0.3);
+            color: var(--text-light);
+        }
+        body.light .portfolio {
+            background: rgba(240, 242, 245, 0.7);
+            color: var(--text-dark);
         }
         
         .portfolio-grid {
@@ -349,6 +502,13 @@
             overflow: hidden;
             transition: var(--transition);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            user-select: none;
+            color: var(--text-light);
+        }
+        body.light .portfolio-item {
+            background: var(--card-bg);
+            border: 1px solid rgba(30, 41, 59, 0.2);
+            color: var(--text-dark);
         }
         
         .portfolio-item:hover {
@@ -381,15 +541,21 @@
             margin-bottom: 10px;
         }
         
-        /* Contact Section - IMPROVED & MORE ORGANIZED */
+        /* Contact Section */
         .contact {
             background: rgba(30, 41, 59, 0.3);
+            color: var(--text-light);
+        }
+        body.light .contact {
+            background: rgba(240, 242, 245, 0.7);
+            color: var(--text-dark);
         }
         
         .contact-content {
             display: flex;
             gap: 50px;
             align-items: flex-start;
+            user-select: none;
         }
         
         .contact-info {
@@ -398,17 +564,32 @@
             padding: 40px;
             border-radius: 15px;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            transition: var(--transition);
         }
-        
+        body.light .contact-info {
+            background: var(--card-bg);
+            color: var(--text-dark);
+            border: 1px solid rgba(30, 41, 59, 0.2);
+        }
+
         .contact-form {
             flex: 1;
             background: var(--card-bg);
             padding: 40px;
             border-radius: 15px;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+        body.light .contact-form {
+            background: var(--card-bg);
+            color: var(--text-dark);
+            border: 1px solid rgba(30, 41, 59, 0.2);
         }
         
-        .contact-info h3 {
+        .contact-info h3,
+        .form-title {
             font-size: 1.5rem;
             margin-bottom: 30px;
             color: var(--accent-color);
@@ -422,12 +603,13 @@
             transition: var(--transition);
             padding: 15px;
             border-radius: 10px;
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--contact-item-bg);
+            cursor: pointer;
         }
         
         .contact-item:hover {
             transform: translateX(10px);
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(6, 214, 160, 0.15);
         }
         
         .contact-item a {
@@ -456,11 +638,17 @@
             transition: var(--transition);
             flex-shrink: 0;
         }
+        body.light .contact-icon {
+            background: var(--primary-color);
+        }
         
         .contact-details h4 {
             margin-bottom: 5px;
             color: var(--text-light);
             font-size: 1.1rem;
+        }
+        body.light .contact-details h4 {
+            color: var(--text-dark);
         }
         
         .contact-details p {
@@ -468,6 +656,9 @@
             color: #cbd5e1;
             transition: var(--transition);
             font-size: 1rem;
+        }
+        body.light .contact-details p {
+            color: #475569;
         }
         
         .contact-item:hover .contact-details p {
@@ -481,12 +672,12 @@
             background: rgba(6, 214, 160, 0.1);
             border-radius: 10px;
             border-left: 4px solid var(--accent-color);
-        }
-        
-        .contact-note p {
-            margin-bottom: 0;
             font-size: 0.9rem;
             color: #cbd5e1;
+            user-select: none;
+        }
+        body.light .contact-note {
+            color: #334155;
         }
         
         .form-group {
@@ -503,11 +694,19 @@
             font-size: 1rem;
             transition: var(--transition);
         }
+        body.light .form-control {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(30, 41, 59, 0.2);
+            color: var(--text-dark);
+        }
         
         .form-control:focus {
             outline: none;
             border-color: var(--primary-color);
             background: rgba(255, 255, 255, 0.15);
+        }
+        body.light .form-control:focus {
+            background: rgba(0, 0, 0, 0.1);
         }
         
         textarea.form-control {
@@ -515,18 +714,18 @@
             resize: vertical;
         }
         
-        .form-title {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            color: var(--accent-color);
-            text-align: center;
-        }
-        
+
         /* Footer */
         footer {
-            background: rgba(15, 23, 42, 0.9);
+            background: var(--header-bg);
             padding: 50px 0 20px;
             text-align: center;
+            color: var(--text-light);
+            user-select: none;
+        }
+        body.light footer {
+            background: rgba(248, 250, 252, 0.9);
+            color: var(--text-dark);
         }
         
         .footer-content {
@@ -534,6 +733,9 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
+        }
+        body.light .footer-content {
+            color: var(--text-dark);
         }
         
         .social-links {
@@ -553,6 +755,10 @@
             text-decoration: none;
             transition: var(--transition);
         }
+        body.light .social-link {
+            color: var(--text-dark);
+            background: var(--card-bg);
+        }
         
         .social-link:hover {
             background: var(--primary-color);
@@ -564,9 +770,14 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             font-size: 0.9rem;
             color: #94a3b8;
+            user-select: none;
+        }
+        body.light .copyright {
+            border-top: 1px solid rgba(30, 41, 59, 0.2);
+            color: #64748b;
         }
         
-        /* IMPROVED: Animasi Background Coding - Lebih Variatif */
+        /* Coding background animations */
         .code-background {
             position: fixed;
             top: 0;
@@ -577,6 +788,7 @@
             opacity: 0.15;
             pointer-events: none;
             overflow: hidden;
+            user-select: none;
         }
 
         .code-line {
@@ -591,6 +803,13 @@
             padding: 5px 10px;
             border-radius: 5px;
             background: rgba(0, 0, 0, 0.2);
+            user-select: none;
+            transition: color 0.4s ease;
+        }
+        body.light .code-line {
+            color: rgba(0, 0, 0, 0.25);
+            background: rgba(255, 255, 255, 0.2);
+            text-shadow: none;
         }
 
         /* Different animation speeds and directions for variety */
@@ -618,7 +837,7 @@
             color: rgba(255, 255, 255, 0.85);
         }
 
-        /* New: Code lines moving from right to left */
+        /* Code lines moving reverse */
         .code-line.reverse {
             animation-name: codeFlowReverse;
             left: auto;
@@ -707,6 +926,11 @@
                 align-items: center;
                 padding-top: 50px;
                 transition: var(--transition);
+                z-index: 9999;
+                user-select: none;
+            }
+            body.light .nav-links {
+                background: var(--header-bg);
             }
             
             .nav-links.active {
@@ -801,7 +1025,7 @@
     </style>
 </head>
 <body>
-    <!-- IMPROVED: Background Animation dengan lebih banyak variasi -->
+    <!-- Background Animation -->
     <div class="code-background" id="codeBackground"></div>
     
     <!-- Header -->
@@ -816,8 +1040,13 @@
                     <li><a href="#portfolio">Portofolio</a></li>
                     <li><a href="#contact">Kontak</a></li>
                 </ul>
-                <div class="menu-toggle">
-                    <i class="fas fa-bars"></i>
+                <div style="display: flex; align-items: center;">
+                    <button class="dark-toggle" id="darkToggle" aria-label="Toggle Dark Mode" title="Toggle Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="menu-toggle" aria-label="Toggle Menu" role="button" tabindex="0">
+                        <i class="fas fa-bars"></i>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -836,7 +1065,10 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="https://github.com/fajarmrkk/fajarmrkk.github.io/blob/main/123%20(1)%20(1).jpg?raw=true" alt="Fajar Rahmadhan">
+                <img
+                  src="https://github.com/fajarmrkk/fajarmrkk.github.io/blob/main/123%20(1)%20(1).jpg?raw=true"
+                  alt="Fajar Rahmadhan"
+                />
             </div>
         </div>
     </section>
@@ -862,7 +1094,10 @@
                     </div>
                 </div>
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1556655842-7ca6e6d1f8fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Tentang Fajar">
+                    <img
+                      src="https://images.unsplash.com/photo-1556655842-7ca6e6d1f8fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+                      alt="Tentang Fajar"
+                    />
                 </div>
             </div>
         </div>
@@ -926,7 +1161,10 @@
             <div class="portfolio-grid">
                 <div class="portfolio-item">
                     <div class="portfolio-image">
-                        <img src="https://images.unsplash.com/photo-1556655842-7ca6e6d1f8fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Project 1">
+                        <img
+                          src="https://images.unsplash.com/photo-1556655842-7ca6e6d1f8fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+                          alt="Project 1"
+                        />
                     </div>
                     <div class="portfolio-content">
                         <h3>Aplikasi E-Commerce Mobile</h3>
@@ -935,7 +1173,10 @@
                 </div>
                 <div class="portfolio-item">
                     <div class="portfolio-image">
-                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af24?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Project 2">
+                        <img
+                          src="https://images.unsplash.com/photo-1581094794329-c8112a89af24?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+                          alt="Project 2"
+                        />
                     </div>
                     <div class="portfolio-content">
                         <h3>Sistem Manajemen Servis HP</h3>
@@ -944,7 +1185,10 @@
                 </div>
                 <div class="portfolio-item">
                     <div class="portfolio-image">
-                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af24?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Project 3">
+                        <img
+                          src="https://images.unsplash.com/photo-1581094794329-c8112a89af24?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+                          alt="Project 3"
+                        />
                     </div>
                     <div class="portfolio-content">
                         <h3>Utility Tools untuk Teknisi</h3>
@@ -955,7 +1199,7 @@
         </div>
     </section>
     
-    <!-- Contact Section - IMPROVED & MORE ORGANIZED -->
+    <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
             <h2>Hubungi Saya</h2>
@@ -1020,13 +1264,13 @@
                     <h3 class="form-title">Kirim Pesan</h3>
                     <form id="contactForm">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Nama Lengkap Anda" required>
+                            <input type="text" class="form-control" placeholder="Nama Lengkap Anda" required />
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Alamat Email Anda" required>
+                            <input type="email" class="form-control" placeholder="Alamat Email Anda" required />
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Subjek Pesan" required>
+                            <input type="text" class="form-control" placeholder="Subjek Pesan" required />
                         </div>
                         <div class="form-group">
                             <textarea class="form-control" placeholder="Tulis pesan Anda di sini..." required></textarea>
@@ -1057,7 +1301,7 @@
     </footer>
     
     <script>
-        // IMPROVED: Create coding background animation dengan lebih banyak variasi
+        // Background animation code
         function createCodeBackground() {
             const codeBackground = document.getElementById('codeBackground');
             const codeSnippets = [
@@ -1117,76 +1361,109 @@
             for (let i = 0; i < 50; i++) {
                 const codeLine = document.createElement('div');
                 codeLine.className = 'code-line';
-                
+
                 if (i % 3 === 0) {
                     codeLine.classList.add('reverse');
                 }
-                
-                codeLine.textContent = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
+
+                codeLine.textContent =
+                    codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
                 codeLine.style.top = `${Math.random() * 100}%`;
                 codeLine.style.animationDelay = `${Math.random() * 40}s`;
                 codeLine.style.left = `${Math.random() * 10}%`;
-                
+
                 if (i % 4 === 0) {
                     codeLine.style.animation = `codeFlow 25s linear infinite, floatVertical 8s ease-in-out infinite`;
-                    codeLine.style.animationDelay = `${Math.random() * 30}s, ${Math.random() * 8}s`;
+                    codeLine.style.animationDelay = `${Math.random() * 30}s, ${
+                        Math.random() * 8
+                    }s`;
                 }
-                
+
                 codeBackground.appendChild(codeLine);
             }
         }
 
-        // Initialize code background
         createCodeBackground();
 
         // Navigation scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+        window.addEventListener('scroll', function () {
+          const header = document.getElementById('header');
+          if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+          } else {
+            header.classList.remove('scrolled');
+          }
         });
 
         // Mobile menu toggle
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.nav-links');
-        
-        menuToggle.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
+
+        menuToggle.addEventListener('click', function () {
+          navLinks.classList.toggle('active');
+        });
+
+        // Support keyboard toggle for menu toggle (accessibility)
+        menuToggle.addEventListener("keypress", function(e) {
+          if (e.key === "Enter" || e.key === " ") {
+            navLinks.classList.toggle("active");
+            e.preventDefault();
+          }
         });
 
         // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    navLinks.classList.remove('active');
-                }
-            });
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              window.scrollTo({
+                top: targetElement.offsetTop - 70,
+                behavior: 'smooth',
+              });
+
+              // Close mobile menu if open
+              navLinks.classList.remove('active');
+            }
+          });
         });
 
         // Contact form submission
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Terima kasih! Pesan Anda telah dikirim. Saya akan menghubungi Anda segera.');
-                this.reset();
-            });
+          contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert(
+              'Terima kasih! Pesan Anda telah dikirim. Saya akan menghubungi Anda segera.'
+            );
+            this.reset();
+          });
         }
+
+        // Dark mode toggle logic
+        const darkToggle = document.getElementById('darkToggle');
+        const body = document.body;
+        // Load saved preference or default to dark
+        if (localStorage.getItem('theme') === 'light') {
+          body.classList.add('light');
+          darkToggle.innerHTML = '<i class="fas fa-sun"></i>';
+          darkToggle.title = 'Toggle Light/Dark Mode';
+        }
+
+        darkToggle.addEventListener('click', () => {
+          body.classList.toggle('light');
+          const isLight = body.classList.contains('light');
+          // Change icon
+          darkToggle.innerHTML = isLight
+            ? '<i class="fas fa-sun"></i>'
+            : '<i class="fas fa-moon"></i>';
+          // Save preference
+          localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        });
     </script>
 </body>
 </html>
