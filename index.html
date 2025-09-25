@@ -1,4 +1,4 @@
-buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle transalte eng/id tampilkan kode penuh <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8" />
@@ -18,7 +18,7 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: background-color 0.4s ease, color 0.4s ease;
+            transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
         }
         
         /* Variabel CSS - Dark mode sebagai default */
@@ -35,6 +35,7 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
             --header-bg: rgba(15, 23, 42, 0.9);
             --nav-link-hover: var(--accent-color);
             --contact-item-bg: rgba(255, 255, 255, 0.05);
+            --section-bg: rgba(30, 41, 59, 0.3);
         }
 
         body.light {
@@ -49,6 +50,7 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
             --header-bg: rgba(248, 250, 252, 0.9);
             --nav-link-hover: var(--primary-color);
             --contact-item-bg: rgba(0, 0, 0, 0.05);
+            --section-bg: rgba(240, 242, 245, 0.7);
         }
         
         /* Dasar Styling */
@@ -58,14 +60,8 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
             color: var(--text-light);
             background-color: var(--dark-bg);
             overflow-x: hidden;
-            transition: background-color 0.6s ease, color 0.6s ease;
         }
         
-        body.light {
-            color: var(--text-light);
-            background-color: var(--dark-bg);
-        }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -293,6 +289,33 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
             outline: none;
         }
 
+        /* Language toggle button */
+        .lang-toggle {
+            margin-left: 15px;
+            cursor: pointer;
+            background: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 20px;
+            user-select: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+        body.light .lang-toggle {
+            color: var(--text-dark);
+        }
+        .lang-toggle:focus {
+            outline: none;
+        }
+        .lang-toggle:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
         /* Adding bounce animation for toggle icon */
         @keyframes bounceToggle {
           0%, 100% {
@@ -384,14 +407,9 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
             }
         }
         
-        /* Other sections reuse original styles with color variables */
-        
         /* About Section */
         .about {
-            background: rgba(30, 41, 59, 0.3);
-        }
-        body.light .about {
-            background: rgba(240, 242, 245, 0.7);
+            background: var(--section-bg);
         }
         
         .about-content {
@@ -482,12 +500,8 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
         
         /* Portfolio Section */
         .portfolio {
-            background: rgba(30, 41, 59, 0.3);
+            background: var(--section-bg);
             color: var(--text-light);
-        }
-        body.light .portfolio {
-            background: rgba(240, 242, 245, 0.7);
-            color: var(--text-dark);
         }
         
         .portfolio-grid {
@@ -543,12 +557,8 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
         
         /* Contact Section */
         .contact {
-            background: rgba(30, 41, 59, 0.3);
+            background: var(--section-bg);
             color: var(--text-light);
-        }
-        body.light .contact {
-            background: rgba(240, 242, 245, 0.7);
-            color: var(--text-dark);
         }
         
         .contact-content {
@@ -804,7 +814,7 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
             border-radius: 5px;
             background: rgba(0, 0, 0, 0.2);
             user-select: none;
-            transition: color 0.4s ease;
+            transition: color 0.5s ease, background 0.5s ease;
         }
         body.light .code-line {
             color: rgba(0, 0, 0, 0.25);
@@ -1034,13 +1044,14 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
             <nav>
                 <a href="#" class="logo">Fajar<span>Rahmadhan</span></a>
                 <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">Tentang</a></li>
-                    <li><a href="#services">Layanan</a></li>
-                    <li><a href="#portfolio">Portofolio</a></li>
-                    <li><a href="#contact">Kontak</a></li>
+                    <li><a href="#home" data-id="home">Home</a></li>
+                    <li><a href="#about" data-id="about">Tentang</a></li>
+                    <li><a href="#services" data-id="services">Layanan</a></li>
+                    <li><a href="#portfolio" data-id="portfolio">Portofolio</a></li>
+                    <li><a href="#contact" data-id="contact">Kontak</a></li>
                 </ul>
                 <div style="display: flex; align-items: center;">
+                    <button class="lang-toggle" id="langToggle" title="Toggle Language">ID</button>
                     <button class="dark-toggle" id="darkToggle" aria-label="Toggle Dark Mode" title="Toggle Dark Mode">
                         <i class="fas fa-moon"></i>
                     </button>
@@ -1057,11 +1068,11 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
         <div class="container">
             <div class="hero-content">
                 <h1>Fajar Rahmadhan</h1>
-                <h2>Teknisi HP & Developer</h2>
-                <p>"Suka benerin hp & coding kode aneh buat... iseng yang produktif!".</p>
+                <h2 data-id="hero-title">Teknisi HP & Developer</h2>
+                <p data-id="hero-description">"Suka benerin hp & coding kode aneh buat... iseng yang produktif!".</p>
                 <div class="hero-btns">
-                    <a href="#portfolio" class="btn">Lihat Portofolio</a>
-                    <a href="#contact" class="btn btn-outline">Hubungi Saya</a>
+                    <a href="#portfolio" class="btn" data-id="hero-btn-portfolio">Lihat Portofolio</a>
+                    <a href="#contact" class="btn btn-outline" data-id="hero-btn-contact">Hubungi Saya</a>
                 </div>
             </div>
             <div class="hero-image">
@@ -1076,21 +1087,21 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
     <!-- About Section -->
     <section class="about" id="about">
         <div class="container">
-            <h2>Tentang Saya</h2>
+            <h2 data-id="about-title">Tentang Saya</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>Halo! Saya Fajar, seorang teknisi HP dan programming...</p>
-                    <p style="margin-top: 15px;">Dari memperbaiki kerusakan hardware hingga membuat aplikasi...</p>
-                    <p style="margin-top: 15px;">pastinya ditemani kopi saat memperbaiki hp hingga coding dalam membuat aplikasi...</p>
+                    <p data-id="about-text-1">Halo! Saya Fajar, seorang teknisi HP dan programming...</p>
+                    <p data-id="about-text-2" style="margin-top: 15px;">Dari memperbaiki kerusakan hardware hingga membuat aplikasi...</p>
+                    <p data-id="about-text-3" style="margin-top: 15px;">pastinya ditemani kopi saat memperbaiki hp hingga coding dalam membuat aplikasi...</p>
                     <div class="skills">
-                        <span class="skill">Perbaikan Hardware</span>
-                        <span class="skill">Software Troubleshooting</span>
-                        <span class="skill">Android Development</span>
-                        <span class="skill">iOS Development</span>
-                        <span class="skill">UI/UX Design</span>
-                        <span class="skill">Flutter</span>
-                        <span class="skill">React Native</span>
-                        <span class="skill">Data Recovery</span>
+                        <span class="skill" data-id="skill-1">Perbaikan Hardware</span>
+                        <span class="skill" data-id="skill-2">Software Troubleshooting</span>
+                        <span class="skill" data-id="skill-3">Android Development</span>
+                        <span class="skill" data-id="skill-4">iOS Development</span>
+                        <span class="skill" data-id="skill-5">UI/UX Design</span>
+                        <span class="skill" data-id="skill-6">Flutter</span>
+                        <span class="skill" data-id="skill-7">React Native</span>
+                        <span class="skill" data-id="skill-8">Data Recovery</span>
                     </div>
                 </div>
                 <div class="about-image">
@@ -1106,49 +1117,49 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
     <!-- Services Section -->
     <section class="services" id="services">
         <div class="container">
-            <h2>Layanan Saya</h2>
+            <h2 data-id="services-title">Layanan Saya</h2>
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-tools"></i>
                     </div>
-                    <h3>Perbaikan Hardware</h3>
-                    <p>Expert Lebih Dari 100 tahun dalam memperbaiki berbagai masalah hardware dan software smartphone..Hihi...</p>
+                    <h3 data-id="service-1-title">Perbaikan Hardware</h3>
+                    <p data-id="service-1-desc">Expert Lebih Dari 100 tahun dalam memperbaiki berbagai masalah hardware dan software smartphone..Hihi...</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-bug"></i>
                     </div>
-                    <h3>Software Troubleshooting</h3>
-                    <p>Diagnosis dan perbaikan masalah software seperti bootloop, virus, error system, dan optimisasi performa.</p>
+                    <h3 data-id="service-2-title">Software Troubleshooting</h3>
+                    <p data-id="service-2-desc">Diagnosis dan perbaikan masalah software seperti bootloop, virus, error system, dan optimisasi performa.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
-                    <h3>Pengembangan Aplikasi</h3>
-                    <p>Pembuatan aplikasi mobile custom sesuai kebutuhan bisnis Anda dengan teknologi terbaru.</p>
+                    <h3 data-id="service-3-title">Pengembangan Aplikasi</h3>
+                    <p data-id="service-3-desc">Pembuatan aplikasi mobile custom sesuai kebutuhan bisnis Anda dengan teknologi terbaru.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-database"></i>
                     </div>
-                    <h3>Pemulihan Data</h3>
-                    <p>Layanan recovery data dari perangkat yang rusak atau terhapus dengan tingkat keberhasilan tinggi.</p>
+                    <h3 data-id="service-4-title">Pemulihan Data</h3>
+                    <p data-id="service-4-desc">Layanan recovery data dari perangkat yang rusak atau terhapus dengan tingkat keberhasilan tinggi.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-paint-brush"></i>
                     </div>
-                    <h3>Custom ROM & Modding</h3>
-                    <p>Instalasi custom ROM, root, dan modifikasi sistem untuk meningkatkan fungsionalitas perangkat.</p>
+                    <h3 data-id="service-5-title">Custom ROM & Modding</h3>
+                    <p data-id="service-5-desc">Instalasi custom ROM, root, dan modifikasi sistem untuk meningkatkan fungsionalitas perangkat.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-headset"></i>
                     </div>
-                    <h3>Konsultasi Teknologi</h3>
-                    <p>Konsultasi mengenai pemilihan perangkat, troubleshooting, dan solusi teknologi terbaik untuk kebutuhan Anda.</p>
+                    <h3 data-id="service-6-title">Konsultasi Teknologi</h3>
+                    <p data-id="service-6-desc">Konsultasi mengenai pemilihan perangkat, troubleshooting, dan solusi teknologi terbaik untuk kebutuhan Anda.</p>
                 </div>
             </div>
         </div>
@@ -1157,7 +1168,7 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
     <!-- Portfolio Section -->
     <section class="portfolio" id="portfolio">
         <div class="container">
-            <h2>Portofolio</h2>
+            <h2 data-id="portfolio-title">Portofolio</h2>
             <div class="portfolio-grid">
                 <div class="portfolio-item">
                     <div class="portfolio-image">
@@ -1167,8 +1178,8 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
                         />
                     </div>
                     <div class="portfolio-content">
-                        <h3>Aplikasi E-Commerce Mobile</h3>
-                        <p>Aplikasi belanja online dengan fitur lengkap dan UI yang intuitif, dikembangkan menggunakan Flutter.</p>
+                        <h3 data-id="portfolio-1-title">Aplikasi E-Commerce Mobile</h3>
+                        <p data-id="portfolio-1-desc">Aplikasi belanja online dengan fitur lengkap dan UI yang intuitif, dikembangkan menggunakan Flutter.</p>
                     </div>
                 </div>
                 <div class="portfolio-item">
@@ -1179,8 +1190,8 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
                         />
                     </div>
                     <div class="portfolio-content">
-                        <h3>Sistem Manajemen Servis HP</h3>
-                        <p>Aplikasi untuk mengelola bisnis servis HP dengan fitur tracking perbaikan dan inventory.</p>
+                        <h3 data-id="portfolio-2-title">Sistem Manajemen Servis HP</h3>
+                        <p data-id="portfolio-2-desc">Aplikasi untuk mengelola bisnis servis HP dengan fitur tracking perbaikan dan inventory.</p>
                     </div>
                 </div>
                 <div class="portfolio-item">
@@ -1191,8 +1202,8 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
                         />
                     </div>
                     <div class="portfolio-content">
-                        <h3>Utility Tools untuk Teknisi</h3>
-                        <p>Kumpulan tools digital yang membantu teknisi HP dalam diagnosis dan perbaikan perangkat.</p>
+                        <h3 data-id="portfolio-3-title">Utility Tools untuk Teknisi</h3>
+                        <p data-id="portfolio-3-desc">Kumpulan tools digital yang membantu teknisi HP dalam diagnosis dan perbaikan perangkat.</p>
                     </div>
                 </div>
             </div>
@@ -1202,10 +1213,10 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
-            <h2>Hubungi Saya</h2>
+            <h2 data-id="contact-title">Hubungi Saya</h2>
             <div class="contact-content">
                 <div class="contact-info">
-                    <h3>Informasi Kontak</h3>
+                    <h3 data-id="contact-info-title">Informasi Kontak</h3>
                     
                     <div class="contact-item">
                         <a href="https://maps.google.com/?q=Boyolali,Indonesia" target="_blank" class="contact-link">
@@ -1213,7 +1224,7 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
                             <div class="contact-details">
-                                <h4>Lokasi</h4>
+                                <h4 data-id="contact-location-title">Lokasi</h4>
                                 <p>Boyolali, Indonesia</p>
                             </div>
                         </a>
@@ -1225,8 +1236,8 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
                                 <i class="fab fa-whatsapp"></i>
                             </div>
                             <div class="contact-details">
-                                <h4>WhatsApp</h4>
-                                <p>Klikk...</p>
+                                <h4 data-id="contact-whatsapp-title">WhatsApp</h4>
+                                <p data-id="contact-whatsapp-text">Klikk...</p>
                             </div>
                         </a>
                     </div>
@@ -1237,8 +1248,8 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
                                 <i class="fab fa-instagram"></i>
                             </div>
                             <div class="contact-details">
-                                <h4>Instagram</h4>
-                                <p>Klikk...</p>
+                                <h4 data-id="contact-instagram-title">Instagram</h4>
+                                <p data-id="contact-instagram-text">Klikk...</p>
                             </div>
                         </a>
                     </div>
@@ -1249,34 +1260,34 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <div class="contact-details">
-                                <h4>Email</h4>
-                                <p>Klikk...</p>
+                                <h4 data-id="contact-email-title">Email</h4>
+                                <p data-id="contact-email-text">Klikk...</p>
                             </div>
                         </a>
                     </div>
                     
                     <div class="contact-note">
-                        <p><i class="fas fa-info-circle"></i> Silakan hubungi saya melalui WhatsApp untuk respon yang lebih cepat</p>
+                        <p><i class="fas fa-info-circle"></i> <span data-id="contact-note">Silakan hubungi saya melalui WhatsApp untuk respon yang lebih cepat</span></p>
                     </div>
                 </div>
                 
                 <div class="contact-form">
-                    <h3 class="form-title">Kirim Pesan</h3>
+                    <h3 class="form-title" data-id="contact-form-title">Kirim Pesan</h3>
                     <form id="contactForm">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Nama Lengkap Anda" required />
+                            <input type="text" class="form-control" placeholder="Nama Lengkap Anda" data-placeholder-en="Your Full Name" required />
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Alamat Email Anda" required />
+                            <input type="email" class="form-control" placeholder="Alamat Email Anda" data-placeholder-en="Your Email Address" required />
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Subjek Pesan" required />
+                            <input type="text" class="form-control" placeholder="Subjek Pesan" data-placeholder-en="Message Subject" required />
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                            <textarea class="form-control" placeholder="Tulis pesan Anda di sini..." data-placeholder-en="Write your message here..." required></textarea>
                         </div>
                         <button type="submit" class="btn" style="width: 100%;">
-                            <i class="fas fa-paper-plane"></i> Kirim Pesan
+                            <i class="fas fa-paper-plane"></i> <span data-id="contact-form-submit">Kirim Pesan</span>
                         </button>
                     </form>
                 </div>
@@ -1301,6 +1312,120 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
     </footer>
     
     <script>
+        // Translations
+        const translations = {
+            id: {
+                "home": "Home",
+                "about": "Tentang",
+                "services": "Layanan",
+                "portfolio": "Portofolio",
+                "contact": "Kontak",
+                "hero-title": "Teknisi HP & Developer",
+                "hero-description": "\"Suka benerin hp & coding kode aneh buat... iseng yang produktif!\".",
+                "hero-btn-portfolio": "Lihat Portofolio",
+                "hero-btn-contact": "Hubungi Saya",
+                "about-title": "Tentang Saya",
+                "about-text-1": "Halo! Saya Fajar, seorang teknisi HP dan programming...",
+                "about-text-2": "Dari memperbaiki kerusakan hardware hingga membuat aplikasi...",
+                "about-text-3": "pastinya ditemani kopi saat memperbaiki hp hingga coding dalam membuat aplikasi...",
+                "skill-1": "Perbaikan Hardware",
+                "skill-2": "Software Troubleshooting",
+                "skill-3": "Android Development",
+                "skill-4": "iOS Development",
+                "skill-5": "UI/UX Design",
+                "skill-6": "Flutter",
+                "skill-7": "React Native",
+                "skill-8": "Data Recovery",
+                "services-title": "Layanan Saya",
+                "service-1-title": "Perbaikan Hardware",
+                "service-1-desc": "Expert Lebih Dari 100 tahun dalam memperbaiki berbagai masalah hardware dan software smartphone..Hihi...",
+                "service-2-title": "Software Troubleshooting",
+                "service-2-desc": "Diagnosis dan perbaikan masalah software seperti bootloop, virus, error system, dan optimisasi performa.",
+                "service-3-title": "Pengembangan Aplikasi",
+                "service-3-desc": "Pembuatan aplikasi mobile custom sesuai kebutuhan bisnis Anda dengan teknologi terbaru.",
+                "service-4-title": "Pemulihan Data",
+                "service-4-desc": "Layanan recovery data dari perangkat yang rusak atau terhapus dengan tingkat keberhasilan tinggi.",
+                "service-5-title": "Custom ROM & Modding",
+                "service-5-desc": "Instalasi custom ROM, root, dan modifikasi sistem untuk meningkatkan fungsionalitas perangkat.",
+                "service-6-title": "Konsultasi Teknologi",
+                "service-6-desc": "Konsultasi mengenai pemilihan perangkat, troubleshooting, dan solusi teknologi terbaik untuk kebutuhan Anda.",
+                "portfolio-title": "Portofolio",
+                "portfolio-1-title": "Aplikasi E-Commerce Mobile",
+                "portfolio-1-desc": "Aplikasi belanja online dengan fitur lengkap dan UI yang intuitif, dikembangkan menggunakan Flutter.",
+                "portfolio-2-title": "Sistem Manajemen Servis HP",
+                "portfolio-2-desc": "Aplikasi untuk mengelola bisnis servis HP dengan fitur tracking perbaikan dan inventory.",
+                "portfolio-3-title": "Utility Tools untuk Teknisi",
+                "portfolio-3-desc": "Kumpulan tools digital yang membantu teknisi HP dalam diagnosis dan perbaikan perangkat.",
+                "contact-title": "Hubungi Saya",
+                "contact-info-title": "Informasi Kontak",
+                "contact-location-title": "Lokasi",
+                "contact-whatsapp-title": "WhatsApp",
+                "contact-whatsapp-text": "Klikk...",
+                "contact-instagram-title": "Instagram",
+                "contact-instagram-text": "Klikk...",
+                "contact-email-title": "Email",
+                "contact-email-text": "Klikk...",
+                "contact-note": "Silakan hubungi saya melalui WhatsApp untuk respon yang lebih cepat",
+                "contact-form-title": "Kirim Pesan",
+                "contact-form-submit": "Kirim Pesan"
+            },
+            en: {
+                "home": "Home",
+                "about": "About",
+                "services": "Services",
+                "portfolio": "Portfolio",
+                "contact": "Contact",
+                "hero-title": "Phone Technician & Developer",
+                "hero-description": "\"Love fixing phones & coding weird stuff for... productive fun!\".",
+                "hero-btn-portfolio": "View Portfolio",
+                "hero-btn-contact": "Contact Me",
+                "about-title": "About Me",
+                "about-text-1": "Hello! I'm Fajar, a phone technician and programmer...",
+                "about-text-2": "From fixing hardware damage to creating applications...",
+                "about-text-3": "of course accompanied by coffee when repairing phones to coding in making applications...",
+                "skill-1": "Hardware Repair",
+                "skill-2": "Software Troubleshooting",
+                "skill-3": "Android Development",
+                "skill-4": "iOS Development",
+                "skill-5": "UI/UX Design",
+                "skill-6": "Flutter",
+                "skill-7": "React Native",
+                "skill-8": "Data Recovery",
+                "services-title": "My Services",
+                "service-1-title": "Hardware Repair",
+                "service-1-desc": "Expert with more than 100 years of experience in fixing various smartphone hardware and software problems..Hehe...",
+                "service-2-title": "Software Troubleshooting",
+                "service-2-desc": "Diagnosis and repair of software problems such as bootloop, viruses, system errors, and performance optimization.",
+                "service-3-title": "Application Development",
+                "service-3-desc": "Custom mobile application development according to your business needs with the latest technology.",
+                "service-4-title": "Data Recovery",
+                "service-4-desc": "Data recovery service from damaged or deleted devices with a high success rate.",
+                "service-5-title": "Custom ROM & Modding",
+                "service-5-desc": "Custom ROM installation, root, and system modifications to improve device functionality.",
+                "service-6-title": "Technology Consulting",
+                "service-6-desc": "Consultation regarding device selection, troubleshooting, and the best technology solutions for your needs.",
+                "portfolio-title": "Portfolio",
+                "portfolio-1-title": "E-Commerce Mobile App",
+                "portfolio-1-desc": "Online shopping application with complete features and intuitive UI, developed using Flutter.",
+                "portfolio-2-title": "HP Service Management System",
+                "portfolio-2-desc": "Application for managing HP service business with repair tracking and inventory features.",
+                "portfolio-3-title": "Utility Tools for Technicians",
+                "portfolio-3-desc": "Collection of digital tools that help HP technicians in diagnosing and repairing devices.",
+                "contact-title": "Contact Me",
+                "contact-info-title": "Contact Information",
+                "contact-location-title": "Location",
+                "contact-whatsapp-title": "WhatsApp",
+                "contact-whatsapp-text": "Click...",
+                "contact-instagram-title": "Instagram",
+                "contact-instagram-text": "Click...",
+                "contact-email-title": "Email",
+                "contact-email-text": "Click...",
+                "contact-note": "Please contact me via WhatsApp for a faster response",
+                "contact-form-title": "Send Message",
+                "contact-form-submit": "Send Message"
+            }
+        };
+
         // Background animation code
         function createCodeBackground() {
             const codeBackground = document.getElementById('codeBackground');
@@ -1437,9 +1562,12 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
         if (contactForm) {
           contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            alert(
-              'Terima kasih! Pesan Anda telah dikirim. Saya akan menghubungi Anda segera.'
-            );
+            const currentLang = document.getElementById('langToggle').textContent;
+            if (currentLang === 'ID') {
+                alert('Terima kasih! Pesan Anda telah dikirim. Saya akan menghubungi Anda segera.');
+            } else {
+                alert('Thank you! Your message has been sent. I will contact you soon.');
+            }
             this.reset();
           });
         }
@@ -1464,6 +1592,69 @@ buat agar saat ganti dark ke white halus dan text terbaca dan tambahan tonggle t
           // Save preference
           localStorage.setItem('theme', isLight ? 'light' : 'dark');
         });
+
+        // Language toggle logic
+        const langToggle = document.getElementById('langToggle');
+        let currentLang = localStorage.getItem('language') || 'id';
+        
+        // Set initial language
+        if (currentLang === 'en') {
+            langToggle.textContent = 'EN';
+            updateLanguage('en');
+        } else {
+            langToggle.textContent = 'ID';
+            updateLanguage('id');
+        }
+
+        langToggle.addEventListener('click', () => {
+            if (currentLang === 'id') {
+                currentLang = 'en';
+                langToggle.textContent = 'EN';
+                updateLanguage('en');
+            } else {
+                currentLang = 'id';
+                langToggle.textContent = 'ID';
+                updateLanguage('id');
+            }
+            // Save preference
+            localStorage.setItem('language', currentLang);
+        });
+
+        // Function to update language
+        function updateLanguage(lang) {
+            // Update all elements with data-id attributes
+            document.querySelectorAll('[data-id]').forEach(element => {
+                const id = element.getAttribute('data-id');
+                if (translations[lang] && translations[lang][id]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        // For form elements, update placeholder
+                        element.placeholder = translations[lang][id];
+                    } else {
+                        // For other elements, update text content
+                        element.textContent = translations[lang][id];
+                    }
+                }
+            });
+
+            // Update placeholders for form elements with data-placeholder-en attributes
+            if (lang === 'en') {
+                document.querySelectorAll('[data-placeholder-en]').forEach(element => {
+                    element.placeholder = element.getAttribute('data-placeholder-en');
+                });
+            } else {
+                // Reset to original placeholders
+                document.querySelectorAll('[data-placeholder-en]').forEach(element => {
+                    // Get the original placeholder from the data attribute
+                    const originalPlaceholder = element.getAttribute('data-placeholder-id');
+                    if (originalPlaceholder) {
+                        element.placeholder = originalPlaceholder;
+                    }
+                });
+            }
+
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+        }
     </script>
 </body>
 </html>
