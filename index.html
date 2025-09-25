@@ -4,6 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Fajar Rahmadhan - Teknisi HP & Developer</title>
+    <meta name="description" content="Fajar Rahmadhan - Teknisi HP & Developer profesional dengan pengalaman dalam perbaikan smartphone dan pengembangan aplikasi mobile.">
+    <meta name="keywords" content="teknisi hp, developer, aplikasi mobile, perbaikan smartphone, flutter, android, ios">
+    <meta name="author" content="Fajar Rahmadhan">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fajarmrkk.github.io/">
+    <meta property="og:title" content="Fajar Rahmadhan - Teknisi HP & Developer">
+    <meta property="og:description" content="Teknisi HP & Developer profesional dengan pengalaman dalam perbaikan smartphone dan pengembangan aplikasi mobile.">
+    <meta property="og:image" content="https://github.com/fajarmrkk/fajarmrkk.github.io/blob/main/123%20(1)%20(1).jpg?raw=true">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://fajarmrkk.github.io/">
+    <meta property="twitter:title" content="Fajar Rahmadhan - Teknisi HP & Developer">
+    <meta property="twitter:description" content="Teknisi HP & Developer profesional dengan pengalaman dalam perbaikan smartphone dan pengembangan aplikasi mobile.">
+    <meta property="twitter:image" content="https://github.com/fajarmrkk/fajarmrkk.github.io/blob/main/123%20(1)%20(1).jpg?raw=true">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍💻</text></svg>">
+    
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -504,6 +525,38 @@
             color: var(--text-light);
         }
         
+        /* Portfolio Filter */
+        .portfolio-filter {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        body.light .filter-btn {
+            border: 1px solid rgba(30, 41, 59, 0.2);
+            color: var(--text-dark);
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -518,6 +571,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             user-select: none;
             color: var(--text-light);
+            position: relative;
         }
         body.light .portfolio-item {
             background: var(--card-bg);
@@ -553,6 +607,155 @@
         .portfolio-content h3 {
             font-size: 1.3rem;
             margin-bottom: 10px;
+        }
+        
+        /* Portfolio Overlay */
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            padding: 20px;
+            text-align: center;
+            border-radius: 15px;
+        }
+
+        body.light .portfolio-overlay {
+            background: rgba(248, 250, 252, 0.95);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-overlay h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        body.light .portfolio-overlay h3 {
+            color: var(--text-dark);
+        }
+
+        .portfolio-overlay p {
+            color: #cbd5e1;
+            margin-bottom: 20px;
+        }
+
+        body.light .portfolio-overlay p {
+            color: #334155;
+        }
+
+        .portfolio-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .portfolio-link {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .portfolio-link:hover {
+            background: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        /* Tech Tags */
+        .portfolio-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .tech-tag {
+            background: rgba(37, 99, 235, 0.2);
+            color: var(--accent-color);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            background: var(--section-bg);
+            padding: 80px 0;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        body.light .testimonial-card {
+            border: 1px solid rgba(30, 41, 59, 0.2);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .testimonial-text::before {
+            content: '"';
+            font-size: 60px;
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            color: var(--primary-color);
+            opacity: 0.3;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .author-info p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--accent-color);
         }
         
         /* Contact Section */
@@ -888,6 +1091,122 @@
             }
         }
 
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        body.light .loading-screen {
+            background: var(--light-bg);
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        body.light .loading-text {
+            color: var(--text-dark);
+        }
+
+        /* Animation classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
         /* Responsive Design */
         @media (max-width: 992px) {
             h1 {
@@ -1035,6 +1354,12 @@
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader"></div>
+        <p class="loading-text">Memuat...</p>
+    </div>
+    
     <!-- Background Animation -->
     <div class="code-background" id="codeBackground"></div>
     
@@ -1048,6 +1373,7 @@
                     <li><a href="#about" data-id="about">Tentang</a></li>
                     <li><a href="#services" data-id="services">Layanan</a></li>
                     <li><a href="#portfolio" data-id="portfolio">Portofolio</a></li>
+                    <li><a href="#testimonials" data-id="testimonials">Testimoni</a></li>
                     <li><a href="#contact" data-id="contact">Kontak</a></li>
                 </ul>
                 <div style="display: flex; align-items: center;">
@@ -1169,8 +1495,17 @@
     <section class="portfolio" id="portfolio">
         <div class="container">
             <h2 data-id="portfolio-title">Portofolio</h2>
+            
+            <!-- Portfolio Filter -->
+            <div class="portfolio-filter">
+                <button class="filter-btn active" data-filter="all">Semua</button>
+                <button class="filter-btn" data-filter="app">Aplikasi</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+                <button class="filter-btn" data-filter="tool">Tools</button>
+            </div>
+            
             <div class="portfolio-grid">
-                <div class="portfolio-item">
+                <div class="portfolio-item" data-category="app">
                     <div class="portfolio-image">
                         <img
                           src="https://images.unsplash.com/photo-1556655842-7ca6e6d1f8fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
@@ -1180,9 +1515,26 @@
                     <div class="portfolio-content">
                         <h3 data-id="portfolio-1-title">Aplikasi E-Commerce Mobile</h3>
                         <p data-id="portfolio-1-desc">Aplikasi belanja online dengan fitur lengkap dan UI yang intuitif, dikembangkan menggunakan Flutter.</p>
+                        <div class="portfolio-tech">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Redux</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>Aplikasi E-Commerce Mobile</h3>
+                        <p>Aplikasi belanja online dengan fitur lengkap dan UI yang intuitif</p>
+                        <div class="portfolio-links">
+                            <a href="#" class="portfolio-link" title="View Demo">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="#" class="portfolio-link" title="View Code">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="portfolio-item">
+                <div class="portfolio-item" data-category="app">
                     <div class="portfolio-image">
                         <img
                           src="https://images.unsplash.com/photo-1581094794329-c8112a89af24?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
@@ -1192,9 +1544,26 @@
                     <div class="portfolio-content">
                         <h3 data-id="portfolio-2-title">Sistem Manajemen Servis HP</h3>
                         <p data-id="portfolio-2-desc">Aplikasi untuk mengelola bisnis servis HP dengan fitur tracking perbaikan dan inventory.</p>
+                        <div class="portfolio-tech">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>Sistem Manajemen Servis HP</h3>
+                        <p>Aplikasi untuk mengelola bisnis servis HP dengan fitur tracking perbaikan</p>
+                        <div class="portfolio-links">
+                            <a href="#" class="portfolio-link" title="View Demo">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="#" class="portfolio-link" title="View Code">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="portfolio-item">
+                <div class="portfolio-item" data-category="tool">
                     <div class="portfolio-image">
                         <img
                           src="https://images.unsplash.com/photo-1581094794329-c8112a89af24?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
@@ -1204,6 +1573,62 @@
                     <div class="portfolio-content">
                         <h3 data-id="portfolio-3-title">Utility Tools untuk Teknisi</h3>
                         <p data-id="portfolio-3-desc">Kumpulan tools digital yang membantu teknisi HP dalam diagnosis dan perbaikan perangkat.</p>
+                        <div class="portfolio-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">Arduino</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-overlay">
+                        <h3>Utility Tools untuk Teknisi</h3>
+                        <p>Kumpulan tools digital yang membantu teknisi HP dalam diagnosis perangkat</p>
+                        <div class="portfolio-links">
+                            <a href="#" class="portfolio-link" title="View Demo">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="#" class="portfolio-link" title="View Code">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 data-id="testimonials-title">Testimoni Klien</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card fade-in">
+                    <p class="testimonial-text">Fajar sangat profesional dalam mengerjakan proyek aplikasi kami. Hasilnya melebihi ekspektasi!</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client" class="author-img">
+                        <div class="author-info">
+                            <h4>Budi Santoso</h4>
+                            <p>CEO TechCompany</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <p class="testimonial-text">Pelayanan perbaikan HP sangat memuaskan. Cepat, rapi, dan harga terjangkau. Highly recommended!</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client" class="author-img">
+                        <div class="author-info">
+                            <h4>Siti Nurhaliza</h4>
+                            <p>Entrepreneur</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <p class="testimonial-text">Aplikasi yang dibuat Fajar sangat user-friendly dan sesuai dengan kebutuhan bisnis kami.</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Client" class="author-img">
+                        <div class="author-info">
+                            <h4>Agus Wijaya</h4>
+                            <p>Store Owner</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1311,6 +1736,11 @@
         </div>
     </footer>
     
+    <!-- Back to top button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+    
     <script>
         // Translations
         const translations = {
@@ -1319,6 +1749,7 @@
                 "about": "Tentang",
                 "services": "Layanan",
                 "portfolio": "Portofolio",
+                "testimonials": "Testimoni",
                 "contact": "Kontak",
                 "hero-title": "Teknisi HP & Developer",
                 "hero-description": "\"Suka benerin hp & coding kode aneh buat... iseng yang produktif!\".",
@@ -1356,6 +1787,7 @@
                 "portfolio-2-desc": "Aplikasi untuk mengelola bisnis servis HP dengan fitur tracking perbaikan dan inventory.",
                 "portfolio-3-title": "Utility Tools untuk Teknisi",
                 "portfolio-3-desc": "Kumpulan tools digital yang membantu teknisi HP dalam diagnosis dan perbaikan perangkat.",
+                "testimonials-title": "Testimoni Klien",
                 "contact-title": "Hubungi Saya",
                 "contact-info-title": "Informasi Kontak",
                 "contact-location-title": "Lokasi",
@@ -1374,6 +1806,7 @@
                 "about": "About",
                 "services": "Services",
                 "portfolio": "Portfolio",
+                "testimonials": "Testimonials",
                 "contact": "Contact",
                 "hero-title": "Phone Technician & Developer",
                 "hero-description": "\"Love fixing phones & coding weird stuff for... productive fun!\".",
@@ -1411,6 +1844,7 @@
                 "portfolio-2-desc": "Application for managing HP service business with repair tracking and inventory features.",
                 "portfolio-3-title": "Utility Tools for Technicians",
                 "portfolio-3-desc": "Collection of digital tools that help HP technicians in diagnosing and repairing devices.",
+                "testimonials-title": "Client Testimonials",
                 "contact-title": "Contact Me",
                 "contact-info-title": "Contact Information",
                 "contact-location-title": "Location",
@@ -1655,6 +2089,109 @@
             // Update HTML lang attribute
             document.documentElement.lang = lang;
         }
+
+        // Portfolio filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    const filter = button.getAttribute('data-filter');
+                    
+                    portfolioItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            item.style.display = 'block';
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'scale(1)';
+                            }, 100);
+                        } else {
+                            item.style.opacity = '0';
+                            item.style.transform = 'scale(0.8)';
+                            setTimeout(() => {
+                                item.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+            
+            // Set initial portfolio item styles
+            portfolioItems.forEach(item => {
+                item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                item.style.opacity = '1';
+                item.style.transform = 'scale(1)';
+            });
+        });
+
+        // Back to top button
+        const backToTopButton = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Scroll animations
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // Add animation classes to elements
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add fade-in class to sections
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.add('fade-in');
+            });
+            
+            // Add slide-in classes to specific elements
+            document.querySelectorAll('.about-text').forEach(element => {
+                element.classList.add('slide-in-left');
+            });
+            
+            document.querySelectorAll('.about-image').forEach(element => {
+                element.classList.add('slide-in-right');
+            });
+            
+            // Trigger initial check
+            animateOnScroll();
+        });
+
+        // Hide loading screen when page is fully loaded
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 500);
+        });
     </script>
 </body>
 </html>
