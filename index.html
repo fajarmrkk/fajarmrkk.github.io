@@ -7,45 +7,454 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Reset CSS */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
+        /* Variabel CSS */
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #f59e0b;
-            --accent: #ec4899;
-            --dark: #1f2937;
-            --light: #f8fafc;
-            --gray: #6b7280;
-            --success: #10b981;
-            
-            /* Dark mode variables */
-            --bg-dark: #0f172a;
-            --card-dark: #1e293b;
-            --text-dark: #f1f5f9;
-            --border-dark: #334155;
+            --primary-color: #2563eb;
+            --secondary-color: #7c3aed;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --accent-color: #06d6a0;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --transition: all 0.3s ease;
         }
-
+        
+        /* Dasar Styling */
         body {
-            font-family: 'Plus Jakarta Sans', 'Inter', 'Segoe UI', system-ui, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             line-height: 1.6;
-            color: var(--dark);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: background 0.5s ease;
-            position: relative;
+            color: var(--text-light);
+            background-color: var(--dark-bg);
             overflow-x: hidden;
         }
-
-        /* Animasi Background Coding - IMPROVED */
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+        
+        header.scrolled {
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            margin-bottom: 1.5rem;
+            font-size: 3.5rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #cbd5e1;
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .hero-image {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45%;
+            z-index: 1;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* About Section */
+        .about {
+            background: rgba(30, 41, 59, 0.3);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .about-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .skill {
+            background: var(--card-bg);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Portfolio Section */
+        .portfolio {
+            background: rgba(30, 41, 59, 0.3);
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .portfolio-item {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .portfolio-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .portfolio-item:hover .portfolio-image img {
+            transform: scale(1.1);
+        }
+        
+        .portfolio-content {
+            padding: 20px;
+        }
+        
+        .portfolio-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        /* Contact Section */
+        .contact-content {
+            display: flex;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-form {
+            flex: 1;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(15, 23, 42, 0.9);
+            padding: 50px 0 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--card-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .social-link:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+        
+        /* IMPROVED: Animasi Background Coding - Lebih Variatif */
         .code-background {
             position: fixed;
             top: 0;
@@ -53,7 +462,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.1; /* Increased opacity for better visibility */
+            opacity: 0.15;
             pointer-events: none;
             overflow: hidden;
         }
@@ -61,34 +470,47 @@
         .code-line {
             position: absolute;
             font-family: 'Courier New', monospace;
-            font-size: 16px; /* Slightly larger font */
-            color: rgba(255, 255, 255, 0.8); /* Brighter color with transparency */
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
             white-space: nowrap;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Glow effect */
-            animation: codeFlow 25s linear infinite;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+            animation: codeFlow 20s linear infinite;
             font-weight: 500;
             padding: 5px 10px;
             border-radius: 5px;
-            background: rgba(0, 0, 0, 0.1); /* Subtle background for better contrast */
+            background: rgba(0, 0, 0, 0.2);
         }
 
-        /* Different animation speeds for variety */
+        /* Different animation speeds and directions for variety */
         .code-line:nth-child(odd) {
-            animation-duration: 30s;
-            animation-delay: -5s;
-            color: rgba(255, 255, 255, 0.7);
+            animation-duration: 25s;
+            animation-delay: -3s;
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .code-line:nth-child(even) {
-            animation-duration: 35s;
-            animation-delay: -10s;
-            color: rgba(255, 255, 255, 0.9);
+            animation-duration: 30s;
+            animation-delay: -7s;
+            color: rgba(255, 255, 255, 0.95);
         }
 
         .code-line:nth-child(3n) {
+            animation-duration: 35s;
+            animation-delay: -12s;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .code-line:nth-child(4n) {
             animation-duration: 40s;
             animation-delay: -15s;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        /* New: Code lines moving from right to left */
+        .code-line.reverse {
+            animation-name: codeFlowReverse;
+            left: auto;
+            right: 0;
         }
 
         @keyframes codeFlow {
@@ -108,6 +530,23 @@
             }
         }
 
+        @keyframes codeFlowReverse {
+            0% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-100vw);
+                opacity: 0;
+            }
+        }
+
         /* Additional animation for vertical movement */
         @keyframes floatVertical {
             0%, 100% {
@@ -118,892 +557,366 @@
             }
         }
 
-        body.dark-mode {
-            background: linear-gradient(135deg, #475569 0%, #334155 100%);
-            color: var(--text-dark);
-        }
-
-        /* Dark mode adjustments for code background */
-        body.dark-mode .code-line {
-            color: rgba(255, 255, 255, 0.9);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
-            background: rgba(0, 0, 0, 0.2);
-        }
-
-        .container {
-            max-width: 1400px; /* Diperbesar dari sebelumnya */
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            max-height: 95vh;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.3s ease;
-            margin: 0 auto;
-        }
-
-        body.dark-mode .container {
-            background: rgba(30, 41, 59, 0.95);
-            border: 1px solid var(--border-dark);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
-        }
-
-        .header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 40px 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-
-        .header::before {
-            content: '';
+        /* New: Floating code elements */
+        .code-float {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="rgba(255,255,255,0.1)"><circle cx="50" cy="50" r="2"/></svg>');
-            animation: float 20s infinite linear;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            animation: floatRandom 15s infinite ease-in-out;
+            pointer-events: none;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); }
-            100% { transform: translateY(-100px) rotate(360deg); }
+        @keyframes floatRandom {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translate(100px, -100px) rotate(10deg);
+                opacity: 0;
+            }
         }
 
-        .dark-mode-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255,255,255,0.2);
-            border: none;
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            cursor: pointer;
-            color: white;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-image {
+                width: 40%;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .contact-content {
+                flex-direction: column;
+            }
         }
-
-        .dark-mode-toggle:hover {
-            background: rgba(255,255,255,0.3);
-            transform: scale(1.1);
-        }
-
-        .profile-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 4px solid white;
-            margin: 0 auto 15px;
-            background: linear-gradient(45deg, var(--secondary), var(--accent));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            position: relative;
-            z-index: 2;
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .profile-img:hover {
-            transform: scale(1.05) rotate(5deg);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 8px;
-            font-weight: 700;
-            position: relative;
-            z-index: 2;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-            font-weight: 300;
-        }
-
-        .tagline {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 12px 24px;
-            border-radius: 50px;
-            display: inline-block;
-            margin-top: 20px;
-            backdrop-filter: blur(10px);
-            position: relative;
-            z-index: 2;
-            max-width: 90%;
-            font-size: 1rem;
-            font-weight: 500;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .tagline:hover {
-            transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .content {
-            padding: 40px 80px; /* Padding kiri-kanan diperbesar */
-            overflow-y: auto;
-            flex-grow: 1;
-        }
-
-        body.dark-mode .content {
-            color: var(--text-dark);
-        }
-
-        .section {
-            margin-bottom: 50px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        h2 {
-            color: var(--dark);
-            margin-bottom: 25px;
-            font-size: 1.8rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        body.dark-mode h2 {
-            color: var(--text-dark);
-        }
-
-        h2::after {
-            content: '';
-            flex: 1;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), transparent);
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Lebar kartu lebih besar */
-            gap: 25px; /* Gap lebih besar */
-            margin-top: 20px;
-        }
-
-        .skill-card {
-            background: var(--light);
-            padding: 25px;
-            border-radius: 16px;
-            border-left: 4px solid var(--primary);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        body.dark-mode .skill-card {
-            background: var(--card-dark);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), transparent);
-            z-index: 0;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
-        }
-
-        .skill-card h3 {
-            color: var(--primary-dark);
-            margin-bottom: 12px;
-            font-size: 1.3rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        body.dark-mode .skill-card h3 {
-            color: var(--secondary);
-        }
-
-        .skill-card p {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            position: relative;
-            z-index: 1;
-        }
-
-        .skill-card ul {
-            list-style: none;
-            margin-top: 10px;
-        }
-
-        .skill-card ul li {
-            padding: 5px 0;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .skill-card ul li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--success);
-            font-weight: bold;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Lebar kartu lebih besar */
-            gap: 30px; /* Gap lebih besar */
-            margin-top: 20px;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        body.dark-mode .project-card {
-            background: var(--card-dark);
-            border: 1px solid var(--border-dark);
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-        }
-
-        .project-card h3 {
-            color: var(--dark);
-            margin-bottom: 12px;
-            font-size: 1.2rem;
-        }
-
-        body.dark-mode .project-card h3 {
-            color: var(--text-dark);
-        }
-
-        .project-card p {
-            color: var(--gray);
-            line-height: 1.7;
-            font-size: 0.95rem;
-        }
-
-        body.dark-mode .project-card p {
-            color: #cbd5e1;
-        }
-
-        .btn-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 20px;
-            justify-content: center;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 14px 24px;
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-            font-size: 0.95rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-            background: linear-gradient(135deg, var(--primary-dark) 0%, #3730a3 100%);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            box-shadow: none;
-        }
-
-        .btn-secondary:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Lebar kartu lebih besar */
-            gap: 25px; /* Gap lebih besar */
-            margin-top: 20px;
-        }
-
-        .contact-card {
-            background: var(--light);
-            padding: 25px;
-            border-radius: 16px;
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        body.dark-mode .contact-card {
-            background: var(--card-dark);
-        }
-
-        .contact-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
-        }
-
-        .contact-card i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-            transition: transform 0.3s ease;
-        }
-
-        .contact-card:hover i {
-            transform: scale(1.2);
-        }
-
-        .contact-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-        }
-
-        .contact-card p {
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            color: var(--gray);
-        }
-
-        body.dark-mode .contact-card p {
-            color: #cbd5e1;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 25px;
-            background: var(--light);
-            color: var(--gray);
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-            flex-shrink: 0;
-        }
-
-        body.dark-mode .footer {
-            background: var(--card-dark);
-            border-top: 1px solid var(--border-dark);
-            color: #94a3b8;
-        }
-
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* Progress bars for skills */
-        .skill-level {
-            margin-top: 10px;
-            background: #e5e7eb;
-            border-radius: 10px;
-            height: 8px;
-            overflow: hidden;
-        }
-
-        body.dark-mode .skill-level {
-            background: #374151;
-        }
-
-        .skill-progress {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 10px;
-            width: 0;
-            transition: width 1.5s ease;
-        }
-
-        /* Mobile-specific improvements */
+        
         @media (max-width: 768px) {
-            body {
-                padding: 10px;
-                align-items: flex-start;
+            .menu-toggle {
+                display: block;
             }
             
-            .container {
-                max-height: none;
-                height: auto;
-                max-width: 100%; /* Lebar penuh di mobile */
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--dark-bg);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 50px;
+                transition: var(--transition);
             }
             
-            .header {
-                padding: 30px 20px;
+            .nav-links.active {
+                left: 0;
             }
             
-            .profile-img {
-                width: 100px;
-                height: 100px;
-                font-size: 36px;
+            .nav-links li {
+                margin: 15px 0;
             }
             
-            .header h1 {
-                font-size: 2rem;
+            .hero {
+                text-align: center;
+                padding-top: 100px;
             }
             
-            .content {
-                padding: 25px; /* Tetap 25px untuk mobile */
+            .hero-image {
+                display: none;
             }
             
-            .skills-grid,
-            .projects-grid,
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
+            .hero-btns {
+                justify-content: center;
             }
             
-            .skill-card,
-            .project-card,
-            .contact-card {
-                padding: 20px;
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
             }
             
             .btn {
                 width: 100%;
-                justify-content: center;
-                padding: 14px 20px;
+                max-width: 250px;
             }
-            
-            .btn-container {
-                flex-direction: column;
-            }
-            
-            h2 {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-                font-size: 1.5rem;
-            }
-            
-            h2::after {
-                width: 100%;
-                margin-top: 5px;
-            }
-            
-            .dark-mode-toggle {
-                top: 15px;
-                right: 15px;
-                width: 40px;
-                height: 40px;
-            }
-            
-            /* Adjust code background for mobile */
-            .code-line {
-                font-size: 14px;
-                opacity: 0.8;
-            }
-        }
-
-        /* Tablet-specific improvements */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .container {
-                max-width: 95%;
-            }
-            
-            .content {
-                padding: 40px 50px; /* Padding lebih kecil untuk tablet */
-            }
-            
-            .skills-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .projects-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* Large screen adjustments */
-        @media (min-width: 1200px) {
-            .container {
-                max-width: 1400px; /* Lebar maksimal untuk layar besar */
-            }
-            
-            .content {
-                padding: 40px 80px; /* Padding lebih besar untuk layar lebar */
-            }
-        }
-
-        /* Extra large screen adjustments */
-        @media (min-width: 1400px) {
-            .container {
-                max-width: 1500px; /* Lebih lebar untuk layar sangat besar */
-            }
-            
-            .content {
-                padding: 40px 100px; /* Padding lebih besar */
-            }
-        }
-
-        /* Improved animations for users who prefer reduced motion */
-        @media (prefers-reduced-motion: reduce) {
-            .floating, .skill-card, .project-card, .contact-card, .btn {
-                animation: none;
-                transition: none;
-            }
-            
-            .code-line {
-                animation: none;
-                display: none;
-            }
-        }
-
-        /* Scrollbar styling */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        body.dark-mode ::-webkit-scrollbar-track {
-            background: #334155;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
         }
     </style>
 </head>
 <body>
-    <!-- Background Animation - IMPROVED -->
+    <!-- IMPROVED: Background Animation dengan lebih banyak variasi -->
     <div class="code-background" id="codeBackground"></div>
     
-    <div class="container">
-        <div class="header">
-            <button class="dark-mode-toggle" id="darkModeToggle">
-                <i class="fas fa-moon"></i>
-            </button>
-            <div class="profile-img floating">
-                🔧
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Fajar<span>Rahmadhan</span></a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">Tentang</a></li>
+                    <li><a href="#services">Layanan</a></li>
+                    <li><a href="#portfolio">Portofolio</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Fajar Rahmadhan</h1>
+                <h2>Teknisi HP & Developer</h2>
+                <p>Spesialis dalam perbaikan smartphone dan pengembangan aplikasi mobile. Menggabungkan keahlian teknis dengan kreativitas untuk memberikan solusi terbaik.</p>
+                <div class="hero-btns">
+                    <a href="#portfolio" class="btn">Lihat Portofolio</a>
+                    <a href="#contact" class="btn btn-outline">Hubungi Saya</a>
+                </div>
             </div>
-            <h1>Fajar Rahmadhan</h1>
-            <p>Teknisi HP & Developer</p>
-            <div class="tagline">
-                "Suka benerin hp & coding kode aneh buat... iseng yang produktif!"
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af24?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Fajar Rahmadhan">
             </div>
         </div>
-        
-        <div class="content">
-            <!-- About Section -->
-            <div class="section" id="about">
-                <h2><i class="fas fa-user"></i> Tentang Saya</h2>
-                <div class="skill-card">
-                    <p>Halo! Saya Fajar, seorang teknisi HP dan programming...</p>
-                    <p style="margin-top: 15px;">Dari memperbaiki kerusakan hardware hingga membuat aplikasi...</p>
-                    <p style="margin-top: 15px;">pastinya ditemani kopi saat memperbaiki hp hingga coding dalam membuat aplikasi...</p>
-                </div>
-            </div>
-
-            <!-- Skills Section -->
-            <div class="section" id="skills">
-                <h2><i class="fas fa-star"></i>  Keahlian(Lebih Kearah Sok Ahli Sih)</h2>
-                <div class="skills-grid">
-                    <div class="skill-card">
-                        <h3>🔧 Servis HP</h3>
-                        <p>Expert Lebih Dari 100 tahun dalam memperbaiki berbagai masalah hardware dan software smartphone..Hihi</p>
-                        <div class="skill-level">
-                            <div class="skill-progress" data-width="95"></div>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <h3>💻 Programming</h3>
-                        <p>Membuat aplikasi, script automation, dan tools praktis untuk kebutuhan sehari-hari..Sok Bijak Aja...</p>
-                        <div class="skill-level">
-                            <div class="skill-progress" data-width="85"></div>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <h3>🔍 Problem Solving</h3>
-                        <p>Analisis dan solusi kreatif untuk berbagai masalah teknis,Ya Walaupun Diri Sendiri Banyak Masalah...</p>
-                        <div class="skill-level">
-                            <div class="skill-progress" data-width="90"></div>
-                        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2>Tentang Saya</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Halo! Saya Fajar Rahmadhan, seorang profesional dengan keahlian ganda sebagai teknisi HP dan developer. Dengan pengalaman lebih dari 5 tahun di industri teknologi, saya telah membantu ratusan klien memperbaiki perangkat mereka dan mengembangkan solusi digital yang inovatif.</p>
+                    <p>Sebagai teknisi HP, saya ahli dalam mendiagnosis dan memperbaiki berbagai masalah hardware dan software pada smartphone. Sedangkan sebagai developer, saya fokus pada pengembangan aplikasi mobile yang user-friendly dan efisien.</p>
+                    <div class="skills">
+                        <span class="skill">Perbaikan Hardware</span>
+                        <span class="skill">Software Troubleshooting</span>
+                        <span class="skill">Android Development</span>
+                        <span class="skill">iOS Development</span>
+                        <span class="skill">UI/UX Design</span>
+                        <span class="skill">Flutter</span>
+                        <span class="skill">React Native</span>
+                        <span class="skill">Data Recovery</span>
                     </div>
                 </div>
-            </div>
-
-            <!-- Services Section -->
-            <div class="section" id="services">
-                <h2><i class="fas fa-tools"></i> Layanan Servis HP(Ini Serius)</h2>
-                <div class="skills-grid">
-                    <div class="skill-card">
-                        <h3>🔄 Software Repair</h3>
-                        <ul>
-                            <li>Flash ROM & Unbrick</li>
-                            <li>Hapus Virus/Malware</li>
-                            <li>Upgrade/Downgrade OS</li>
-                            <li>Unlock Pattern/FRP</li>
-                            <li>Root & Custom ROM</li>
-                        </ul>
-                    </div>
-                    <div class="skill-card">
-                        <h3>⚙️ Hardware Repair</h3>
-                        <ul>
-                            <li>Ganti LCD/Layar</li>
-                            <li>Ganti Charger Port</li>
-                            <li>Ganti Baterai</li>
-                            <li>Perbaikan Motherboard</li>
-                            <li>Ganti Komponen Internal</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="btn-container">
-                    <a href="https://wa.me/6282265321264?text=Halo%20Fajar!%20Mau%20konsul%20servis%20HP" class="btn">
-                        <i class="fab fa-whatsapp"></i> Konsultasi Gratis
-                    </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        <i class="fas fa-phone"></i> Hubungi Saya
-                    </a>
-                </div>
-            </div>
-
-            <!-- Projects Section -->
-            <div class="section" id="projects">
-                <h2><i class="fas fa-code"></i> Project Terbaru</h2>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <h3>Automation Tools</h3>
-                        <p>Kumpulan script Python untuk otomatisasi tugas sehari-hari, termasuk backup data, pengelolaan file, dan monitoring sistem.</p>
-                    </div>
-                    <div class="project-card">
-                        <h3>Mobile Repair Database</h3>
-                        <p>Aplikasi web untuk mencatat riwayat servis HP, inventory sparepart, dan manajemen pelanggan.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contact Section -->
-            <div class="section" id="contact">
-                <h2><i class="fas fa-envelope"></i> Hubungi Saya</h2>
-                <div class="contact-grid">
-                    <div class="contact-card">
-                        <i class="fab fa-whatsapp"></i>
-                        <h3>WhatsApp</h3>
-                        <p>Fast Response</p>
-                        <a href="https://wa.me/6282265321264" class="btn btn-secondary">
-                            Chat Sekarang
-                        </a>
-                    </div>
-                    <div class="contact-card">
-                        <i class="fab fa-instagram"></i>
-                        <h3>Instagram</h3>
-                        <p>@fajarrahmadhan08</p>
-                        <a href="https://instagram.com/fajarrahmadhan08" class="btn btn-secondary">
-                            Follow
-                        </a>
-                    </div>
-                    <div class="contact-card">
-                        <i class="fab fa-github"></i>
-                        <h3>GitHub</h3>
-                        <p>Project & Code</p>
-                        <a href="https://github.com/fajarmrkk" class="btn btn-secondary">
-                            Explore
-                        </a>
-                    </div>
-                    <div class="contact-card">
-                        <i class="fas fa-envelope"></i>
-                        <h3>Email</h3>
-                        <p>Professional</p>
-                        <a href="mailto:fajarrahmadhan08@gmail.com" class="btn btn-secondary">
-                            Email Saya
-                        </a>
-                    </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1556655842-7ca6e6d1f8fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Tentang Fajar">
                 </div>
             </div>
         </div>
-        
-        <div class="footer">
-            <p><strong>"Iseng-iseng berhadiah, siapa tau berguna buat orang lain"</strong></p>
-            <p style="margin-top: 10px; font-size: 0.9em;">© 2025 Fajar Rahmadhan - All rights reserved</p>
+    </section>
+    
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2>Layanan Saya</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Perbaikan Hardware</h3>
+                    <p>Perbaikan komponen fisik smartphone seperti layar, baterai, port charging, dan komponen internal lainnya dengan garansi.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3>Software Troubleshooting</h3>
+                    <p>Diagnosis dan perbaikan masalah software seperti bootloop, virus, error system, dan optimisasi performa.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Pengembangan Aplikasi</h3>
+                    <p>Pembuatan aplikasi mobile custom sesuai kebutuhan bisnis Anda dengan teknologi terbaru.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Pemulihan Data</h3>
+                    <p>Layanan recovery data dari perangkat yang rusak atau terhapus dengan tingkat keberhasilan tinggi.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Custom ROM & Modding</h3>
+                    <p>Instalasi custom ROM, root, dan modifikasi sistem untuk meningkatkan fungsionalitas perangkat.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Konsultasi Teknologi</h3>
+                    <p>Konsultasi mengenai pemilihan perangkat, troubleshooting, dan solusi teknologi terbaik untuk kebutuhan Anda.</p>
+                </div>
+            </div>
         </div>
-    </div>
-
+    </section>
+    
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <h2>Portofolio</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1556655842-7ca6e6d1f8fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Project 1">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Aplikasi E-Commerce Mobile</h3>
+                        <p>Aplikasi belanja online dengan fitur lengkap dan UI yang intuitif, dikembangkan menggunakan Flutter.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af24?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Project 2">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Sistem Manajemen Servis HP</h3>
+                        <p>Aplikasi untuk mengelola bisnis servis HP dengan fitur tracking perbaikan dan inventory.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af24?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Project 3">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Utility Tools untuk Teknisi</h3>
+                        <p>Kumpulan tools digital yang membantu teknisi HP dalam diagnosis dan perbaikan perangkat.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>Hubungi Saya</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h3>Lokasi</h3>
+                            <p>Jakarta, Indonesia</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h3>Telepon</h3>
+                            <p>+62 812-3456-7890</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h3>Email</h3>
+                            <p>fajar.rahmadhan@example.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h3>Jam Kerja</h3>
+                            <p>Senin - Jumat: 09:00 - 18:00</p>
+                            <p>Sabtu: 09:00 - 15:00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Nama Anda" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Email Anda" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Subjek" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Pesan Anda" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Kirim Pesan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">Fajar<span>Rahmadhan</span></div>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Fajar Rahmadhan. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
     <script>
-        // Dark Mode Toggle
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const darkModeIcon = darkModeToggle.querySelector('i');
-        
-        // Check for saved theme or prefer-color-scheme
-        if (localStorage.getItem('darkMode') === 'enabled' || 
-            (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('darkMode'))) {
-            enableDarkMode();
-        }
-        
-        darkModeToggle.addEventListener('click', () => {
-            if (document.body.classList.contains('dark-mode')) {
-                disableDarkMode();
-            } else {
-                enableDarkMode();
-            }
-        });
-        
-        function enableDarkMode() {
-            document.body.classList.add('dark-mode');
-            darkModeIcon.classList.remove('fa-moon');
-            darkModeIcon.classList.add('fa-sun');
-            localStorage.setItem('darkMode', 'enabled');
-        }
-        
-        function disableDarkMode() {
-            document.body.classList.remove('dark-mode');
-            darkModeIcon.classList.remove('fa-sun');
-            darkModeIcon.classList.add('fa-moon');
-            localStorage.setItem('darkMode', 'disabled');
-        }
-        
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    
-                    // Animate skill progress bars
-                    if (entry.target.id === 'skills') {
-                        setTimeout(() => {
-                            document.querySelectorAll('.skill-progress').forEach(bar => {
-                                const width = bar.getAttribute('data-width');
-                                bar.style.width = width + '%';
-                            });
-                        }, 300);
-                    }
-                }
-            });
-        }, observerOptions);
-
-        // Observe all sections for animation
-        document.querySelectorAll('.section').forEach(section => {
-            observer.observe(section);
-        });
-        
-        // Smooth scrolling for anchor links
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const target = document.querySelector(targetId);
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-        });
-
-        // Add loading animation
-        window.addEventListener('load', function() {
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.5s ease';
-            
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 100);
-        });
-
-        // Create coding background animation - IMPROVED
+        // IMPROVED: Create coding background animation dengan lebih banyak variasi
         function createCodeBackground() {
             const codeBackground = document.getElementById('codeBackground');
             const codeSnippets = [
@@ -1042,17 +955,38 @@
                 '}',
                 '// Always learning, always coding',
                 'const passion = "Technology";',
-                'const goal = "Help others";'
+                'const goal = "Help others";',
+                '// Mobile Repair Specialist',
+                'function diagnoseIssue(symptoms) {',
+                'return analysisResult;',
+                '}',
+                '// Full Stack Developer',
+                'async function deployApp() {',
+                'await buildProcess();',
+                'return "Deployed!";',
+                '}',
+                '// Problem Solver',
+                'const solution = findOptimalFix(problem);',
+                'applyFix(solution);',
+                '// Tech Enthusiast',
+                'const interests = ["AI", "IoT", "Mobile"];',
+                'interests.forEach(explore);'
             ];
 
-            // Create more lines of code for better effect
-            for (let i = 0; i < 25; i++) {
+            // Create more lines of code for better effect (doubled the amount)
+            for (let i = 0; i < 50; i++) {
                 const codeLine = document.createElement('div');
                 codeLine.className = 'code-line';
+                
+                // Alternate between normal and reverse animation
+                if (i % 3 === 0) {
+                    codeLine.classList.add('reverse');
+                }
+                
                 codeLine.textContent = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
                 codeLine.style.top = `${Math.random() * 100}%`;
-                codeLine.style.animationDelay = `${Math.random() * 30}s`;
-                codeLine.style.left = `${Math.random() * 10}%`; // Random horizontal starting position
+                codeLine.style.animationDelay = `${Math.random() * 40}s`;
+                codeLine.style.left = `${Math.random() * 10}%`;
                 
                 // Add slight vertical animation for some lines
                 if (i % 4 === 0) {
@@ -1062,10 +996,71 @@
                 
                 codeBackground.appendChild(codeLine);
             }
+
+            // Add floating code elements for more depth
+            for (let i = 0; i < 15; i++) {
+                const floatElement = document.createElement('div');
+                floatElement.className = 'code-float';
+                floatElement.textContent = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
+                floatElement.style.left = `${Math.random() * 100}%`;
+                floatElement.style.top = `${Math.random() * 100}%`;
+                floatElement.style.animationDelay = `${Math.random() * 20}s`;
+                floatElement.style.fontSize = `${12 + Math.random() * 6}px`;
+                codeBackground.appendChild(floatElement);
+            }
         }
 
         // Initialize code background
         createCodeBackground();
+
+        // Navigation scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Contact form submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Terima kasih! Pesan Anda telah dikirim. Saya akan menghubungi Anda segera.');
+                this.reset();
+            });
+        }
     </script>
 </body>
 </html>
