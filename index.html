@@ -1,1192 +1,735 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fajar Rahmadhan - Teknisi HP & Developer</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* Reset CSS */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        /* Variabel CSS */
-        :root {
-            --primary-color: #2563eb;
-            --secondary-color: #7c3aed;
-            --dark-bg: #0f172a;
-            --light-bg: #f8fafc;
-            --text-dark: #1e293b;
-            --text-light: #f1f5f9;
-            --accent-color: #06d6a0;
-            --card-bg: rgba(255, 255, 255, 0.1);
-            --transition: all 0.3s ease;
-        }
-        
-        /* Dasar Styling */
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            line-height: 1.6;
-            color: var(--text-light);
-            background-color: var(--dark-bg);
-            overflow-x: hidden;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        section {
-            padding: 80px 0;
-        }
-        
-        h1, h2, h3, h4 {
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
-        
-        h1 {
-            font-size: 3.5rem;
-        }
-        
-        h2 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-        
-        h2:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            border-radius: 2px;
-        }
-        
-        p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-        }
-        
-        .btn-outline:hover {
-            background: var(--primary-color);
-            color: white;
-        }
-        
-        /* Header & Navigation */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(10px);
-            transition: var(--transition);
-        }
-        
-        header.scrolled {
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: white;
-            text-decoration: none;
-        }
-        
-        .logo span {
-            color: var(--accent-color);
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-        
-        .nav-links li {
-            margin-left: 30px;
-        }
-        
-        .nav-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-            position: relative;
-        }
-        
-        .nav-links a:hover {
-            color: var(--accent-color);
-        }
-        
-        .nav-links a:after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-color);
-            transition: var(--transition);
-        }
-        
-        .nav-links a:hover:after {
-            width: 100%;
-        }
-        
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        /* Hero Section - IMPROVED */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            padding-top: 80px;
-        }
-        
-        .hero-content {
-            max-width: 600px;
-            z-index: 2;
-        }
-        
-        .hero h1 {
-            margin-bottom: 1.5rem;
-            font-size: 3.5rem;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: #cbd5e1;
-        }
-        
-        .hero-btns {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .hero-image {
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 45%;
-            z-index: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .hero-image img {
-            width: 350px;
-            height: 350px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 8px solid rgba(37, 99, 235, 0.3);
-            box-shadow: 
-                0 0 0 4px rgba(124, 58, 237, 0.2),
-                0 20px 40px rgba(0, 0, 0, 0.3),
-                0 0 60px rgba(37, 99, 235, 0.4);
-            transition: var(--transition);
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .hero-image img:hover {
-            transform: scale(1.05);
-            box-shadow: 
-                0 0 0 4px rgba(124, 58, 237, 0.3),
-                0 25px 50px rgba(0, 0, 0, 0.4),
-                0 0 80px rgba(37, 99, 235, 0.6);
-        }
-        
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(-50%) scale(1);
-            }
-            50% {
-                transform: translateY(-53%) scale(1.02);
-            }
-        }
-        
-        /* About Section */
-        .about {
-            background: rgba(30, 41, 59, 0.3);
-        }
-        
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-        }
-        
-        .about-text {
-            flex: 1;
-        }
-        
-        .about-image {
-            flex: 1;
-            text-align: center;
-        }
-        
-        .about-image img {
-            max-width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 30px;
-        }
-        
-        .skill {
-            background: var(--card-bg);
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        /* Services Section */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .service-card {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .service-icon {
-            font-size: 3rem;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-        }
-        
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-        
-        /* Portfolio Section */
-        .portfolio {
-            background: rgba(30, 41, 59, 0.3);
-        }
-        
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .portfolio-item {
-            background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .portfolio-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .portfolio-image {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .portfolio-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-        
-        .portfolio-item:hover .portfolio-image img {
-            transform: scale(1.1);
-        }
-        
-        .portfolio-content {
-            padding: 20px;
-        }
-        
-        .portfolio-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-        
-        /* Contact Section - IMPROVED & MORE ORGANIZED */
-        .contact {
-            background: rgba(30, 41, 59, 0.3);
-        }
-        
-        .contact-content {
-            display: flex;
-            gap: 50px;
-            align-items: flex-start;
-        }
-        
-        .contact-info {
-            flex: 1;
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .contact-form {
-            flex: 1;
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .contact-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            color: var(--accent-color);
-            text-align: center;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-            transition: var(--transition);
-            padding: 15px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.05);
-        }
-        
-        .contact-item:hover {
-            transform: translateX(10px);
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        .contact-item a {
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            align-items: center;
-            width: 100%;
-        }
-        
-        .contact-item:hover .contact-icon {
-            background: var(--accent-color);
-            transform: scale(1.1);
-        }
-        
-        .contact-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--primary-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 20px;
-            font-size: 1.5rem;
-            transition: var(--transition);
-            flex-shrink: 0;
-        }
-        
-        .contact-details h4 {
-            margin-bottom: 5px;
-            color: var(--text-light);
-            font-size: 1.1rem;
-        }
-        
-        .contact-details p {
-            margin-bottom: 0;
-            color: #cbd5e1;
-            transition: var(--transition);
-            font-size: 1rem;
-        }
-        
-        .contact-item:hover .contact-details p {
-            color: var(--accent-color);
-        }
-        
-        .contact-note {
-            text-align: center;
-            margin-top: 30px;
-            padding: 15px;
-            background: rgba(6, 214, 160, 0.1);
-            border-radius: 10px;
-            border-left: 4px solid var(--accent-color);
-        }
-        
-        .contact-note p {
-            margin-bottom: 0;
-            font-size: 0.9rem;
-            color: #cbd5e1;
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            color: white;
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            background: rgba(255, 255, 255, 0.15);
-        }
-        
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .form-title {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            color: var(--accent-color);
-            text-align: center;
-        }
-        
-        /* Footer */
-        footer {
-            background: rgba(15, 23, 42, 0.9);
-            padding: 50px 0 20px;
-            text-align: center;
-        }
-        
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .social-link {
-            width: 40px;
-            height: 40px;
-            background: var(--card-bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        
-        .social-link:hover {
-            background: var(--primary-color);
-            transform: translateY(-3px);
-        }
-        
-        .copyright {
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            color: #94a3b8;
-        }
-        
-        /* IMPROVED: Animasi Background Coding - Lebih Variatif */
-        .code-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.15;
-            pointer-events: none;
-            overflow: hidden;
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Fajar Rahmadhan - Teknisi HP & Developer</title>
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+/* Reset & Variabel */
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: #7c3aed;
+  --dark-bg: #0f172a;
+  --light-bg: #f8fafc;
+  --text-dark: #1e293b;
+  --text-light: #f1f5f9;
+  --accent-color: #06d6a0;
+  --card-bg: rgba(255,255,255,0.1);
+  --transition: all 0.3s ease;
+}
 
-        .code-line {
-            position: absolute;
-            font-family: 'Courier New', monospace;
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.9);
-            white-space: nowrap;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
-            animation: codeFlow 20s linear infinite;
-            font-weight: 500;
-            padding: 5px 10px;
-            border-radius: 5px;
-            background: rgba(0, 0, 0, 0.2);
-        }
+/* Light Mode Variables Override */
+body.light-mode {
+  --primary-color: #3b82f6;
+  --secondary-color: #8b5cf6;
+  --dark-bg: #f8fafc;
+  --text-dark: #1e293b;
+  --text-light: #f1f5f9;
+  --card-bg: rgba(0,0,0,0.05);
+}
 
-        /* Different animation speeds and directions for variety */
-        .code-line:nth-child(odd) {
-            animation-duration: 25s;
-            animation-delay: -3s;
-            color: rgba(255, 255, 255, 0.8);
-        }
+/* Body */
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  line-height: 1.6;
+  background-color: var(--dark-bg);
+  color: var(--text-light);
+  transition: background-color 0.5s, color 0.5s;
+}
 
-        .code-line:nth-child(even) {
-            animation-duration: 30s;
-            animation-delay: -7s;
-            color: rgba(255, 255, 255, 0.95);
-        }
+/* Container & Sections */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+section {
+  padding: 80px 0;
+}
 
-        .code-line:nth-child(3n) {
-            animation-duration: 35s;
-            animation-delay: -12s;
-            color: rgba(255, 255, 255, 0.7);
-        }
+/* Headings */
+h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+h2:after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+  border-radius: 2px;
+}
+p {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
 
-        .code-line:nth-child(4n) {
-            animation-duration: 40s;
-            animation-delay: -15s;
-            color: rgba(255, 255, 255, 0.85);
-        }
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+}
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+}
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+}
+.btn-outline:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
 
-        /* New: Code lines moving from right to left */
-        .code-line.reverse {
-            animation-name: codeFlowReverse;
-            left: auto;
-            right: 0;
-        }
+/* Header & Navigation */
+header {
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  background: rgba(15,23,42,0.9);
+  backdrop-filter: blur(10px);
+  transition: var(--transition);
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+header.scrolled {
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+nav {
+  display: flex; align-items: center;
+}
+.logo {
+  font-size: 1.8rem; font-weight: 700; color:#fff; text-decoration:none; margin-left:20px;
+}
+.logo span {
+  color: var(--accent-color);
+}
+.nav-links {
+  display: flex; list-style: none; margin-left: 20px;
+}
+.nav-links li {
+  margin-left: 30px;
+}
+.nav-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+  position:relative;
+}
+.nav-links a:hover {
+  color: var(--accent-color);
+}
+.nav-links a:after {
+  content: '';
+  position: absolute; bottom:-5px; left:0; width:0; height:2px;
+  background: var(--accent-color);
+  transition: var(--transition);
+}
+.nav-links a:hover:after {
+  width:100%;
+}
+.menu-toggle {
+  display:none; font-size:1.5rem; cursor:pointer; color:#fff; margin-right:20px;
+}
+.mode-toggle {
+  background: transparent;
+  border: 2px solid #fff;
+  border-radius: 25px;
+  padding: 5px 10px;
+  font-size: 1rem;
+  cursor:pointer;
+  color:#fff; margin-left:10px;
+}
+.mode-toggle:hover {
+  background: #fff; color:#000;
+}
 
-        @keyframes codeFlow {
-            0% {
-                transform: translateX(-100%);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(100vw);
-                opacity: 0;
-            }
-        }
+/* Hero Section */
+.hero {
+  min-height:100vh; display:flex; align-items:center; padding-top:80px; position:relative;
+}
+.hero-content { max-width:600px; z-index:2; }
+.hero h1 { margin-bottom:1.5rem; font-size:3.5rem; }
+.hero p { font-size:1.2rem; margin-bottom:2rem; color:#cbd5e1; }
+.hero-btns { display:flex; gap:15px; }
+.hero-image {
+  position:absolute; right:0; top:50%; transform: translateY(-50%);
+  width:45%; display:flex; justify-content:center; align-items:center; z-index:1;
+}
+.hero-image img {
+  width:350px; height:350px; border-radius:50%; object-fit:cover;
+  border:8px solid rgba(37,99,235,0.3);
+  box-shadow:0 0 0 4px rgba(124,58,237,0.2),0 20px 40px rgba(0,0,0,0.3),0 0 60px rgba(37,99,235,0.4);
+  transition: var(--transition);
+}
+.hero-image img:hover {
+  transform: scale(1.05);
+  box-shadow:0 0 0 4px rgba(124,58,237,0.3),0 25px 50px rgba(0,0,0,0.4),0 0 80px rgba(37,99,235,0.6);
+}
 
-        @keyframes codeFlowReverse {
-            0% {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(-100vw);
-                opacity: 0;
-            }
-        }
+/* About, Services, Portfolio, Contact sections - same styling with responsiveness, omitted for brevity, assume similar structure */
 
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            h1 {
-                font-size: 2.8rem;
-            }
-            
-            h2 {
-                font-size: 2.2rem;
-            }
-            
-            .hero-image {
-                width: 40%;
-            }
-            
-            .hero-image img {
-                width: 280px;
-                height: 280px;
-            }
-            
-            .about-content {
-                flex-direction: column;
-            }
-            
-            .contact-content {
-                flex-direction: column;
-            }
-            
-            .contact-info, .contact-form {
-                width: 100%;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-            
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 70px);
-                background: var(--dark-bg);
-                flex-direction: column;
-                align-items: center;
-                padding-top: 50px;
-                transition: var(--transition);
-            }
-            
-            .nav-links.active {
-                left: 0;
-            }
-            
-            .nav-links li {
-                margin: 15px 0;
-            }
-            
-            .hero {
-                text-align: center;
-                padding-top: 100px;
-            }
-            
-            .hero-image {
-                position: relative;
-                top: auto;
-                right: auto;
-                transform: none;
-                width: 100%;
-                margin-top: 40px;
-            }
-            
-            .hero-image img {
-                width: 250px;
-                height: 250px;
-                animation: float 6s ease-in-out infinite;
-            }
-            
-            @keyframes float {
-                0%, 100% {
-                    transform: scale(1);
-                }
-                50% {
-                    transform: scale(1.05);
-                }
-            }
-            
-            .hero-btns {
-                justify-content: center;
-            }
-            
-            .contact-item {
-                padding: 10px;
-            }
-            
-            .contact-icon {
-                width: 50px;
-                height: 50px;
-                margin-right: 15px;
-            }
-            
-            .footer-content {
-                flex-direction: column;
-                gap: 30px;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            h2 {
-                font-size: 1.8rem;
-            }
-            
-            section {
-                padding: 60px 0;
-            }
-            
-            .hero-image img {
-                width: 200px;
-                height: 200px;
-            }
-            
-            .hero-btns {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .btn {
-                width: 100%;
-                max-width: 250px;
-            }
-            
-            .contact-info, .contact-form {
-                padding: 20px;
-            }
-        }
-    </style>
+.about {
+  background: rgba(30, 41, 59, 0.3);
+}
+.about-content {
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:40px;
+}
+.about-text { flex:1; }
+.about-image { flex:1; text-align:center; }
+.about-image img { max-width:100%; border-radius:20px; box-shadow:0 15px 30px rgba(0,0,0,0.2); }
+
+.skills {
+  display:flex; flex-wrap:wrap; gap:15px; margin-top:30px;
+}
+.skill {
+  background: var(--card-bg);
+  padding:10px 20px; border-radius:50px; font-size:0.9rem; border:1px solid rgba(255,255,255,0.1);
+}
+
+/* Services Section */
+.services-grid {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px;
+}
+.service-card {
+  background: var(--card-bg);
+  padding:30px; border-radius:15px; text-align:center; transition:var(--transition); border:1px solid rgba(255,255,255,0.1);
+}
+.service-card:hover {
+  transform:translateY(-10px);
+  box-shadow:0 15px 30px rgba(0,0,0,0.2);
+}
+.service-icon {
+  font-size:3rem; color:var(--accent-color); margin-bottom:20px;
+}
+.service-card h3 { font-size:1.5rem; margin-bottom:15px; }
+
+/* Portfolio */
+.portfolio-grid {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px;
+}
+.portfolio-item {
+  background: var(--card-bg);
+  border-radius:15px; overflow:hidden; transition:var(--transition); border:1px solid rgba(255,255,255,0.1);
+}
+.portfolio-item:hover {
+  transform:translateY(-5px);
+  box-shadow:0 15px 30px rgba(0,0,0,0.2);
+}
+.portfolio-image {
+  height:200px; overflow:hidden;
+}
+.portfolio-image img {
+  width:100%; height:100%; object-fit:cover; transition:var(--transition);
+}
+.portfolio-item:hover .portfolio-image img {
+  transform:scale(1.1);
+}
+.portfolio-content {
+  padding:20px;
+}
+.portfolio-content h3 {
+  font-size:1.3rem; margin-bottom:10px;
+}
+
+/* Contact Section */
+.contact {
+  background: rgba(30, 41, 59, 0.3);
+}
+.contact-content {
+  display:flex; flex-wrap:wrap; gap:50px; align-items:flex-start;
+}
+.contact-info, .contact-form {
+  flex:1; background: var(--card-bg); padding:40px; border-radius:15px; border:1px solid rgba(255,255,255,0.1);
+}
+.contact-info h3 {
+  font-size:1.5rem; margin-bottom:30px; color:var(--accent-color); text-align:center;
+}
+.contact-item {
+  display:flex; align-items:center; margin-bottom:30px; padding:15px; border-radius:10px; background:rgba(255,255,255,0.05); transition:var(--transition);
+}
+.contact-item:hover {
+  transform:translateX(10px);
+  background:rgba(255,255,255,0.1);
+}
+.contact-link {
+  display:flex; align-items:center; width:100%; text-decoration:none; color:inherit;
+}
+.contact-icon {
+  width:60px; height:60px; background:var(--primary-color); border-radius:50%; display:flex; justify-content:center; align-items:center; margin-right:20px; font-size:1.5rem; transition:var(--transition);
+}
+.contact-item:hover .contact-icon {
+  background:var(--accent-color);
+  transform:scale(1.1);
+}
+.contact-details h4 {
+  margin-bottom:5px; color:var(--text-light); font-size:1.1rem;
+}
+.contact-details p {
+  margin-bottom:0; color:#cbd5e1; font-size:1rem; transition:var(--transition);
+}
+.contact-item:hover .contact-details p {
+  color:var(--accent-color);
+}
+.contact-note {
+  text-align:center; margin-top:30px; padding:15px; background:rgba(6,214,160,0.1); border-radius:10px; border-left:4px solid var(--accent-color);
+}
+.contact-note p { margin-bottom:0; font-size:0.9rem; color:#cbd5e1; }
+
+/* Footer */
+footer {
+  background: rgba(15,23,42,0.9);
+  padding:50px 0 20px;
+  text-align:center;
+}
+.footer-content {
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; padding:0 20px;
+}
+.social-links {
+  display:flex; gap:15px;
+}
+.social-link {
+  width:40px; height:40px; background:var(--card-bg); border-radius:50%; display:flex; justify-content:center; align-items:center; color:#fff; transition:var(--transition);
+}
+.social-link:hover {
+  background:var(--primary-color);
+  transform:translateY(-3px);
+}
+.copyright {
+  padding-top:20px; border-top:1px solid rgba(255,255,255,0.1); font-size:0.9rem; color:#94a3b8; margin-top:20px;
+}
+
+/* Code background animation styles */
+.code-background {
+  position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; opacity:0.15; pointer-events:none; overflow:hidden;
+}
+.code-line {
+  position:absolute; font-family:'Courier New', monospace; font-size:16px; color: rgba(255,255,255,0.9); white-space:nowrap; text-shadow:0 0 10px rgba(255,255,255,0.7); font-weight:500; padding:5px 10px; border-radius:5px; background:rgba(0,0,0,0.2);
+  animation: codeFlow 20s linear infinite;
+}
+@keyframes codeFlow {
+  0% {transform:translateX(-100%); opacity:0;}
+  10% {opacity:1;}
+  90% {opacity:1;}
+  100% {transform:translateX(100vw); opacity:0;}
+}
+
+/* Responsive adjustments */
+@media(max-width:992px){
+  header {
+    flex-direction:column; align-items:flex-start; padding:10px 20px;
+  }
+  .hero {
+    flex-direction:column; padding-top:120px;
+  }
+  .hero-image {
+    position:relative; width:100%; top:auto; transform:none; margin-top:20px;
+  }
+  .nav-links {
+    position:relative; flex-direction:column; width:100%; max-height:0; overflow:hidden; transition: max-height 0.3s ease;
+  }
+  .nav-links.active {
+    max-height:500px;
+  }
+  .menu-toggle {
+    display:block; margin:10px 20px;
+  }
+}
+@media(max-width:576px){
+  h1 { font-size:2.2rem; }
+  h2 { font-size:1.8rem; }
+  section { padding:60px 0; }
+  .hero-image img { width:200px; height:200px; }
+  .footer-content { flex-direction:column; align-items:center; }
+}
+
+/* Additional styles if needed */
+</style>
 </head>
 <body>
-    <!-- IMPROVED: Background Animation dengan lebih banyak variasi -->
-    <div class="code-background" id="codeBackground"></div>
-    
-    <!-- Header -->
-    <header id="header">
-        <div class="container">
-            <nav>
-                <a href="#" class="logo">Fajar<span>Rahmadhan</span></a>
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">Tentang</a></li>
-                    <li><a href="#services">Layanan</a></li>
-                    <li><a href="#portfolio">Portofolio</a></li>
-                    <li><a href="#contact">Kontak</a></li>
-                </ul>
-                <div class="menu-toggle">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </nav>
-        </div>
-    </header>
-    
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Fajar Rahmadhan</h1>
-                <h2>Teknisi HP & Developer</h2>
-                <p>"Suka benerin hp & coding kode aneh buat... iseng yang produktif!".</p>
-                <div class="hero-btns">
-                    <a href="#portfolio" class="btn">Lihat Portofolio</a>
-                    <a href="#contact" class="btn btn-outline">Hubungi Saya</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <img src="https://github.com/fajarmrkk/fajarmrkk.github.io/blob/main/123%20(1)%20(1).jpg?raw=true" alt="Fajar Rahmadhan">
-            </div>
-        </div>
-    </section>
-    
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <h2>Tentang Saya</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Halo! Saya Fajar, seorang teknisi HP dan programming...</p>
-                    <p style="margin-top: 15px;">Dari memperbaiki kerusakan hardware hingga membuat aplikasi...</p>
-                    <p style="margin-top: 15px;">pastinya ditemani kopi saat memperbaiki hp hingga coding dalam membuat aplikasi...</p>
-                    <div class="skills">
-                        <span class="skill">Perbaikan Hardware</span>
-                        <span class="skill">Software Troubleshooting</span>
-                        <span class="skill">Android Development</span>
-                        <span class="skill">iOS Development</span>
-                        <span class="skill">UI/UX Design</span>
-                        <span class="skill">Flutter</span>
-                        <span class="skill">React Native</span>
-                        <span class="skill">Data Recovery</span>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1556655842-7ca6e6d1f8fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Tentang Fajar">
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <div class="container">
-            <h2>Layanan Saya</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-tools"></i>
-                    </div>
-                    <h3>Perbaikan Hardware</h3>
-                    <p>Expert Lebih Dari 100 tahun dalam memperbaiki berbagai masalah hardware dan software smartphone..Hihi...</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-bug"></i>
-                    </div>
-                    <h3>Software Troubleshooting</h3>
-                    <p>Diagnosis dan perbaikan masalah software seperti bootloop, virus, error system, dan optimisasi performa.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3>Pengembangan Aplikasi</h3>
-                    <p>Pembuatan aplikasi mobile custom sesuai kebutuhan bisnis Anda dengan teknologi terbaru.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <h3>Pemulihan Data</h3>
-                    <p>Layanan recovery data dari perangkat yang rusak atau terhapus dengan tingkat keberhasilan tinggi.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <h3>Custom ROM & Modding</h3>
-                    <p>Instalasi custom ROM, root, dan modifikasi sistem untuk meningkatkan fungsionalitas perangkat.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <h3>Konsultasi Teknologi</h3>
-                    <p>Konsultasi mengenai pemilihan perangkat, troubleshooting, dan solusi teknologi terbaik untuk kebutuhan Anda.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Portfolio Section -->
-    <section class="portfolio" id="portfolio">
-        <div class="container">
-            <h2>Portofolio</h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="https://images.unsplash.com/photo-1556655842-7ca6e6d1f8fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Project 1">
-                    </div>
-                    <div class="portfolio-content">
-                        <h3>Aplikasi E-Commerce Mobile</h3>
-                        <p>Aplikasi belanja online dengan fitur lengkap dan UI yang intuitif, dikembangkan menggunakan Flutter.</p>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af24?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Project 2">
-                    </div>
-                    <div class="portfolio-content">
-                        <h3>Sistem Manajemen Servis HP</h3>
-                        <p>Aplikasi untuk mengelola bisnis servis HP dengan fitur tracking perbaikan dan inventory.</p>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image">
-                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af24?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Project 3">
-                    </div>
-                    <div class="portfolio-content">
-                        <h3>Utility Tools untuk Teknisi</h3>
-                        <p>Kumpulan tools digital yang membantu teknisi HP dalam diagnosis dan perbaikan perangkat.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Contact Section - IMPROVED & MORE ORGANIZED -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2>Hubungi Saya</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Informasi Kontak</h3>
-                    
-                    <div class="contact-item">
-                        <a href="https://maps.google.com/?q=Boyolali,Indonesia" target="_blank" class="contact-link">
-                            <div class="contact-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h4>Lokasi</h4>
-                                <p>Boyolali, Indonesia</p>
-                            </div>
-                        </a>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <a href="https://wa.me/6282265321264?text=Halo%20Fajar,%20saya%20tertarik%20dengan%20layanan%20Anda" target="_blank" class="contact-link">
-                            <div class="contact-icon">
-                                <i class="fab fa-whatsapp"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h4>WhatsApp</h4>
-                                <p>Klikk...</p>
-                            </div>
-                        </a>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <a href="https://www.instagram.com/fajarmrkk/" target="_blank" class="contact-link">
-                            <div class="contact-icon">
-                                <i class="fab fa-instagram"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h4>Instagram</h4>
-                                <p>Klikk...</p>
-                            </div>
-                        </a>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <a href="mailto:fajarmrk@gmail.com" class="contact-link">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h4>Email</h4>
-                                <p>Klikk...</p>
-                            </div>
-                        </a>
-                    </div>
-                    
-                    <div class="contact-note">
-                        <p><i class="fas fa-info-circle"></i> Silakan hubungi saya melalui WhatsApp untuk respon yang lebih cepat</p>
-                    </div>
-                </div>
-                
-                <div class="contact-form">
-                    <h3 class="form-title">Kirim Pesan</h3>
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Nama Lengkap Anda" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Alamat Email Anda" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Subjek Pesan" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" placeholder="Tulis pesan Anda di sini..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn" style="width: 100%;">
-                            <i class="fas fa-paper-plane"></i> Kirim Pesan
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="logo">Fajar<span>Rahmadhan</span></div>
-                <div class="social-links">
-                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Fajar Rahmadhan. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
-    
-    <script>
-        // IMPROVED: Create coding background animation dengan lebih banyak variasi
-        function createCodeBackground() {
-            const codeBackground = document.getElementById('codeBackground');
-            const codeSnippets = [
-                'function repairPhone() {',
-                'const fix = analyzeProblem();',
-                'return applySolution(fix);',
-                '}',
-                'class MobileDeveloper {',
-                'constructor(skills) {',
-                'this.skills = skills;',
-                '}',
-                'codeProject() {',
-                'return "Working...";',
-                '}',
-                '}',
-                '// Fixing bugs since 2020',
-                'if (problem.exists) {',
-                'debug(problem);',
-                'solve(problem);',
-                '}',
-                'const technologies = [',
-                '"JavaScript", "Python", "HTML",',
-                '"CSS", "React", "Node.js"',
-                '];',
-                'for (let tech of technologies) {',
-                'master(tech);',
-                '}',
-                '// Debugging is like being a detective',
-                'function findBug() {',
-                'console.log("Searching...");',
-                'return bugFound ? fix() : continueSearch();',
-                '}',
-                'while (true) {',
-                'learnNewSkill();',
-                'improveCode();',
-                '}',
-                '// Always learning, always coding',
-                'const passion = "Technology";',
-                'const goal = "Help others";',
-                '// Mobile Repair Specialist',
-                'function diagnoseIssue(symptoms) {',
-                'return analysisResult;',
-                '}',
-                '// Full Stack Developer',
-                'async function deployApp() {',
-                'await buildProcess();',
-                'return "Deployed!";',
-                '}',
-                '// Problem Solver',
-                'const solution = findOptimalFix(problem);',
-                'applyFix(solution);',
-                '// Tech Enthusiast',
-                'const interests = ["AI", "IoT", "Mobile"];',
-                'interests.forEach(explore);'
-            ];
 
-            for (let i = 0; i < 50; i++) {
-                const codeLine = document.createElement('div');
-                codeLine.className = 'code-line';
-                
-                if (i % 3 === 0) {
-                    codeLine.classList.add('reverse');
-                }
-                
-                codeLine.textContent = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
-                codeLine.style.top = `${Math.random() * 100}%`;
-                codeLine.style.animationDelay = `${Math.random() * 40}s`;
-                codeLine.style.left = `${Math.random() * 10}%`;
-                
-                if (i % 4 === 0) {
-                    codeLine.style.animation = `codeFlow 25s linear infinite, floatVertical 8s ease-in-out infinite`;
-                    codeLine.style.animationDelay = `${Math.random() * 30}s, ${Math.random() * 8}s`;
-                }
-                
-                codeBackground.appendChild(codeLine);
-            }
-        }
+<!-- Background coding animation -->
+<div class="code-background" id="codeBackground"></div>
 
-        // Initialize code background
-        createCodeBackground();
+<!-- Header with Mode Toggle -->
+<header id="header">
+  <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+    <a href="#home" class="logo">Fajar<span>Rahmadhan</span></a>
+    <div style="display:flex; align-items:center;">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">Tentang</a></li>
+        <li><a href="#services">Layanan</a></li>
+        <li><a href="#portfolio">Portofolio</a></li>
+        <li><a href="#contact">Kontak</a></li>
+      </ul>
+      <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
+      <button class="mode-toggle" id="modeToggle" title="Ganti Mode Gelap/Terang"><i class="fas fa-moon"></i></button>
+    </div>
+  </div>
+</header>
 
-        // Navigation scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+<!-- Hero Section -->
+<section class="hero" id="home">
+  <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;">
+    <div class="hero-content" style="max-width:600px;">
+      <h1>Fajar Rahmadhan</h1>
+      <h2>Teknisi HP & Developer</h2>
+      <p>"Suka benerin hp & coding kode aneh buat... iseng yang produktif!".</p>
+      <div class="hero-btns" style="display:flex; gap:15px;">
+        <a href="#portfolio" class="btn">Lihat Portofolio</a>
+        <a href="#contact" class="btn btn-outline">Hubungi Saya</a>
+      </div>
+    </div>
+    <div class="hero-image" style="width:45%; display:flex; justify-content:center; align-items:center;">
+      <img src="https://github.com/fajarmrkk/fajarmrkk.github.io/blob/main/123%20(1)%20(1).jpg?raw=true" alt="Fajar Rahmadhan" style="width:350px; height:350px; border-radius:50%; object-fit:cover; border:8px solid rgba(37,99,235,0.3); box-shadow:0 0 0 4px rgba(124,58,237,0.2),0 20px 40px rgba(0,0,0,0.3),0 0 60px rgba(37,99,235,0.4); transition: var(--transition);" />
+    </div>
+  </div>
+</section>
 
-        // Mobile menu toggle
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
-        
-        menuToggle.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-        });
+<!-- About Section -->
+<section style="background: rgba(30, 41, 59, 0.3);" id="about">
+  <div style="max-width:1200px; margin:auto; padding:40px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;">
+    <div style="flex:1;">
+      <h2>Tentang Saya</h2>
+      <p>Halo! Saya Fajar, seorang teknisi HP dan programming...</p>
+      <p style="margin-top: 15px;">Dari memperbaiki kerusakan hardware hingga membuat aplikasi...</p>
+      <p style="margin-top: 15px;">pastinya ditemani kopi saat memperbaiki hp hingga coding dalam membuat aplikasi...</p>
+      <div class="skills" style="display:flex; flex-wrap:wrap; gap:15px; margin-top:30px;">
+        <span class="skill">Perbaikan Hardware</span>
+        <span class="skill">Software Troubleshooting</span>
+        <span class="skill">Android Development</span>
+        <span class="skill">iOS Development</span>
+        <span class="skill">UI/UX Design</span>
+        <span class="skill">Flutter</span>
+        <span class="skill">React Native</span>
+        <span class="skill">Data Recovery</span>
+      </div>
+    </div>
+    <div style="flex:1; text-align:center;">
+      <img src="https://images.unsplash.com/photo-1556655842-7ca6e6d1f8fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Tentang Fajar" style="max-width:100%; border-radius:20px; box-shadow:0 15px 30px rgba(0,0,0,0.2);" />
+    </div>
+  </div>
+</section>
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    navLinks.classList.remove('active');
-                }
-            });
-        });
+<!-- Services Section -->
+<section id="services" style="padding:80px 0;">
+  <div style="max-width:1200px; margin:auto; padding:40px;">
+    <h2>Layanan Saya</h2>
+    <div class="services-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px;">
+      <!-- Service Card 1 -->
+      <div class="service-card" style="background: var(--card-bg); padding:30px; border-radius:15px; text-align:center; transition:var(--transition); border:1px solid rgba(255,255,255,0.1);">
+        <div class="service-icon"><i class="fas fa-tools"></i></div>
+        <h3>Perbaikan Hardware</h3>
+        <p>Expert Lebih Dari 100 tahun dalam memperbaiki berbagai masalah hardware dan software smartphone..Hihi...</p>
+      </div>
+      <!-- Service Card 2 -->
+      <div class="service-card" style="background: var(--card-bg); padding:30px; border-radius:15px; text-align:center; transition:var(--transition); border:1px solid rgba(255,255,255,0.1);">
+        <div class="service-icon"><i class="fas fa-bug"></i></div>
+        <h3>Software Troubleshooting</h3>
+        <p>Diagnosis dan perbaikan masalah software seperti bootloop, virus, error system, dan optimisasi performa.</p>
+      </div>
+      <!-- Service Card 3 -->
+      <div class="service-card" style="background: var(--card-bg); padding:30px; border-radius:15px; text-align:center; transition:var(--transition); border:1px solid rgba(255,255,255,0.1);">
+        <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+        <h3>Pengembangan Aplikasi</h3>
+        <p>Pembuatan aplikasi mobile custom sesuai kebutuhan bisnis Anda dengan teknologi terbaru.</p>
+      </div>
+      <!-- Service Card 4 -->
+      <div class="service-card" style="background: var(--card-bg); padding:30px; border-radius:15px; text-align:center; transition:var(--transition); border:1px solid rgba(255,255,255,0.1);">
+        <div class="service-icon"><i class="fas fa-database"></i></div>
+        <h3>Pemulihan Data</h3>
+        <p>Layanan recovery data dari perangkat yang rusak atau terhapus dengan tingkat keberhasilan tinggi.</p>
+      </div>
+      <!-- Service Card 5 -->
+      <div class="service-card" style="background: var(--card-bg); padding:30px; border-radius:15px; text-align:center; transition:var(--transition); border:1px solid rgba(255,255,255,0.1);">
+        <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+        <h3>Custom ROM & Modding</h3>
+        <p>Instalasi custom ROM, root, dan modifikasi sistem untuk meningkatkan fungsionalitas perangkat.</p>
+      </div>
+      <!-- Service Card 6 -->
+      <div class="service-card" style="background: var(--card-bg); padding:30px; border-radius:15px; text-align:center; transition:var(--transition); border:1px solid rgba(255,255,255,0.1);">
+        <div class="service-icon"><i class="fas fa-headset"></i></div>
+        <h3>Konsultasi Teknologi</h3>
+        <p>Konsultasi mengenai pemilihan perangkat, troubleshooting, dan solusi teknologi terbaik untuk kebutuhan Anda.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Contact form submission
-        const contactForm = document.getElementById('contactForm');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Terima kasih! Pesan Anda telah dikirim. Saya akan menghubungi Anda segera.');
-                this.reset();
-            });
-        }
-    </script>
+<!-- Portfolio Section -->
+<section id="portfolio" style="padding:80px 0; background: rgba(30, 41, 59, 0.3);">
+  <div style="max-width:1200px; margin:auto; padding:40px;">
+    <h2>Portofolio</h2>
+    <div class="portfolio-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px;">
+      <!-- Portfolio Item 1 -->
+      <div class="portfolio-item" style="background: var(--card-bg); border-radius:15px; overflow:hidden; transition:var(--transition); border:1px solid rgba(255,255,255,0.1);">
+        <div class="portfolio-image" style="height:200px; overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1556655842-7ca6e6d1f8fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Project 1" style="width:100%; height:100%; object-fit:cover; transition:var(--transition);" />
+        </div>
+        <div class="portfolio-content" style="padding:20px;">
+          <h3>Aplikasi E-Commerce Mobile</h3>
+          <p>Aplikasi belanja online dengan fitur lengkap dan UI yang intuitif, dikembangkan menggunakan Flutter.</p>
+        </div>
+      </div>
+      <!-- Portfolio Item 2 -->
+      <div class="portfolio-item" style="background: var(--card-bg); border-radius:15px; overflow:hidden; transition:var(--transition); border:1px solid rgba(255,255,255,0.1);">
+        <div class="portfolio-image" style="height:200px; overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af24?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Project 2" style="width:100%; height:100%; object-fit:cover; transition:var(--transition);" />
+        </div>
+        <div class="portfolio-content" style="padding:20px;">
+          <h3>Sistem Manajemen Servis HP</h3>
+          <p>Aplikasi untuk mengelola bisnis servis HP dengan fitur tracking perbaikan dan inventory.</p>
+        </div>
+      </div>
+      <!-- Portfolio Item 3 -->
+      <div class="portfolio-item" style="background: var(--card-bg); border-radius:15px; overflow:hidden; transition:var(--transition); border:1px solid rgba(255,255,255,0.1);">
+        <div class="portfolio-image" style="height:200px; overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af24?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Project 3" style="width:100%; height:100%; object-fit:cover; transition:var(--transition);" />
+        </div>
+        <div class="portfolio-content" style="padding:20px;">
+          <h3>Utility Tools untuk Teknisi</h3>
+          <p>Kumpulan tools digital yang membantu teknisi HP dalam diagnosis dan perbaikan perangkat.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" style="padding:80px 0; background: rgba(30, 41, 59, 0.3);">
+  <div style="max-width:1200px; margin:auto; padding:40px;">
+    <h2>Hubungi Saya</h2>
+    <div style="display:flex; flex-wrap:wrap; gap:50px; align-items:flex-start;">
+      <!-- Info -->
+      <div class="contact-info" style="flex:1; background: var(--card-bg); padding:40px; border-radius:15px; border:1px solid rgba(255,255,255,0.1);">
+        <h3 style="text-align:center; margin-bottom:30px; color:var(--accent-color);">Informasi Kontak</h3>
+        <!-- Location -->
+        <div class="contact-item" style="display:flex; align-items:center; margin-bottom:30px; padding:15px; border-radius:10px; background:rgba(255,255,255,0.05); transition:var(--transition);">
+          <a href="https://maps.google.com/?q=Boyolali,Indonesia" target="_blank" style="display:flex; align-items:center; width:100%; text-decoration:none; color:inherit;">
+            <div class="contact-icon" style="width:60px; height:60px; background:var(--primary-color); border-radius:50%; display:flex; justify-content:center; align-items:center; margin-right:20px; font-size:1.5rem;"> <i class="fas fa-map-marker-alt"></i> </div>
+            <div class="contact-details">
+              <h4 style="margin-bottom:5px;">Lokasi</h4>
+              <p style="margin-bottom:0;">Boyolali, Indonesia</p>
+            </div>
+          </a>
+        </div>
+        <!-- WhatsApp -->
+        <div class="contact-item" style="display:flex; align-items:center; margin-bottom:30px; padding:15px; border-radius:10px; background:rgba(255,255,255,0.05); transition:var(--transition);">
+          <a href="https://wa.me/6282265321264?text=Halo%20Fajar,%20saya%20tertarik%20dengan%20layanan%20Anda" target="_blank" style="display:flex; align-items:center; width:100%; text-decoration:none; color:inherit;">
+            <div class="contact-icon" style="width:60px; height:60px; background:var(--primary-color); border-radius:50%; display:flex; justify-content:center; align-items:center; margin-right:20px; font-size:1.5rem;"> <i class="fab fa-whatsapp"></i> </div>
+            <div class="contact-details">
+              <h4 style="margin-bottom:5px;">WhatsApp</h4>
+              <p style="margin-bottom:0;">Klikk...</p>
+            </div>
+          </a>
+        </div>
+        <!-- Instagram -->
+        <div class="contact-item" style="display:flex; align-items:center; margin-bottom:30px; padding:15px; border-radius:10px; background:rgba(255,255,255,0.05); transition:var(--transition);">
+          <a href="https://www.instagram.com/fajarmrkk/" target="_blank" style="display:flex; align-items:center; width:100%; text-decoration:none; color:inherit;">
+            <div class="contact-icon" style="width:60px; height:60px; background:var(--primary-color); border-radius:50%; display:flex; justify-content:center; align-items:center; margin-right:20px; font-size:1.5rem;"> <i class="fab fa-instagram"></i> </div>
+            <div class="contact-details">
+              <h4 style="margin-bottom:5px;">Instagram</h4>
+              <p style="margin-bottom:0;">Klikk...</p>
+            </div>
+          </a>
+        </div>
+        <!-- Email -->
+        <div class="contact-item" style="display:flex; align-items:center; margin-bottom:30px; padding:15px; border-radius:10px; background:rgba(255,255,255,0.05); transition:var(--transition);">
+          <a href="mailto:fajarmrk@gmail.com" style="display:flex; align-items:center; width:100%; text-decoration:none; color:inherit;">
+            <div class="contact-icon" style="width:60px; height:60px; background:var(--primary-color); border-radius:50%; display:flex; justify-content:center; align-items:center; margin-right:20px; font-size:1.5rem;"> <i class="fas fa-envelope"></i> </div>
+            <div class="contact-details">
+              <h4 style="margin-bottom:5px;">Email</h4>
+              <p style="margin-bottom:0;">Klikk...</p>
+            </div>
+          </a>
+        </div>
+        <div class="contact-note" style="text-align:center; margin-top:30px; padding:15px; background: rgba(6,214,160,0.1); border-radius:10px; border-left:4px solid var(--accent-color);">
+          <p style="margin-bottom:0;"><i class="fas fa-info-circle"></i> Silakan hubungi saya melalui WhatsApp untuk respon yang lebih cepat</p>
+        </div>
+      </div>
+      <!-- Contact Form -->
+      <div class="contact-form" style="flex:1; background:var(--card-bg); padding:40px; border-radius:15px; border:1px solid rgba(255,255,255,0.1);">
+        <h3 style="text-align:center; margin-bottom:30px; color:var(--accent-color); font-size:1.5rem;">Kirim Pesan</h3>
+        <form id="contactForm">
+          <div class="form-group" style="margin-bottom:25px;">
+            <input type="text" class="form-control" placeholder="Nama Lengkap Anda" required style="width:100%; padding:15px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:10px; color:#fff; font-size:1rem; transition:var(--transition);"/>
+          </div>
+          <div class="form-group" style="margin-bottom:25px;">
+            <input type="email" class="form-control" placeholder="Alamat Email Anda" required style="width:100%; padding:15px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:10px; color:#fff; font-size:1rem; transition:var(--transition);"/>
+          </div>
+          <div class="form-group" style="margin-bottom:25px;">
+            <input type="text" class="form-control" placeholder="Subjek Pesan" required style="width:100%; padding:15px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:10px; color:#fff; font-size:1rem; transition:var(--transition);"/>
+          </div>
+          <div class="form-group" style="margin-bottom:25px;">
+            <textarea class="form-control" placeholder="Tulis pesan Anda di sini..." required style="width:100%; min-height:150px; padding:15px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:10px; color:#fff; font-size:1rem; resize:vertical; transition:var(--transition);"></textarea>
+          </div>
+          <button type="submit" class="btn" style="width:100%;"><i class="fas fa-paper-plane"></i> Kirim Pesan</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div style="max-width:1200px; margin:auto; padding:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+    <div class="logo" style="font-size:1.8rem; font-weight:700; color:#fff;">Fajar<span style="color:var(--accent-color);">Rahmadhan</span></div>
+    <div class="social-links" style="margin-top:10px;">
+      <a href="#" class="social-link" style="width:40px; height:40px; background:var(--card-bg); border-radius:50%; display:flex; justify-content:center; align-items:center; color:#fff; transition:var(--transition);"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#" class="social-link" style="width:40px; height:40px; background:var(--card-bg); border-radius:50%; display:flex; justify-content:center; align-items:center; color:#fff; transition:var(--transition);"><i class="fab fa-github"></i></a>
+    </div>
+  </div>
+  <div style="margin-top:10px; border-top:1px solid rgba(255,255,255,0.1); padding-top:10px; font-size:0.9rem; color:#94a3b8;">
+    <p style="text-align:center;">&copy; 2025 Fajar Rahmadhan. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script>
+// Toggle mobile menu
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+menuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach((a) => {
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
+      // close menu
+      navLinks.classList.remove('active');
+    }
+  });
+});
+// Header scroll effect
+window.addEventListener('scroll', () => {
+  const header = document.getElementById('header');
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+// Mode toggle
+const modeBtn = document.getElementById('modeToggle');
+modeBtn.addEventListener('click', () => {
+  document.body.classList.toggle('light-mode');
+  const icon = modeBtn.querySelector('i');
+  if (document.body.classList.contains('light-mode')) {
+    icon.classList.remove('fa-moon');
+    icon.classList.add('fa-sun');
+  } else {
+    icon.classList.remove('fa-sun');
+    icon.classList.add('fa-moon');
+  }
+});
+// Create code background animation
+function createCodeBackground() {
+  const container = document.getElementById('codeBackground');
+  const snippets = [
+    'function repairPhone() {',
+    'const fix = analyzeProblem();',
+    'return applySolution(fix);',
+    '}',
+    'class MobileDeveloper {',
+    'constructor(skills) {',
+    'this.skills = skills;',
+    '}',
+    'codeProject() {',
+    'return "Working...";',
+    '}',
+    '// Fixing bugs since 2020',
+    'if (problem.exists) {',
+    'debug(problem);',
+    'solve(problem);',
+    '}',
+    'const technologies = [',
+    '"JavaScript", "Python", "HTML",',
+    '"CSS", "React", "Node.js"',
+    '];',
+    'for (let tech of technologies) {',
+    'master(tech);',
+    '}',
+    '// Debugging is like being a detective',
+    'function findBug() {',
+    'console.log("Searching...");',
+    'return bugFound ? fix() : continueSearch();',
+    '}',
+    'while (true) {',
+    'learnNewSkill();',
+    'improveCode();',
+    '}',
+    '// Always learning, always coding',
+    'const passion = "Technology";',
+    'const goal = "Help others";',
+    '// Mobile Repair Specialist',
+    'function diagnoseIssue(symptoms) {',
+    'return analysisResult;',
+    '}',
+    '// Full Stack Developer',
+    'async function deployApp() {',
+    'await buildProcess();',
+    'return "Deployed!";',
+    '}',
+    '// Problem Solver',
+    'const solution = findOptimalFix(problem);',
+    'applyFix(solution);',
+    '// Tech Enthusiast',
+    'const interests = ["AI", "IoT", "Mobile"];',
+    'interests.forEach(explore);'
+  ];
+  for (let i=0; i<50; i++) {
+    const line = document.createElement('div');
+    line.className='code-line';
+    if(i%3===0) line.classList.add('reverse');
+    line.textContent = snippets[Math.floor(Math.random()*snippets.length)];
+    line.style.top = Math.random()*100+'%';
+    line.style.left = Math.random()*10+'%';
+    line.style.animationDelay = Math.random()*40+'s';
+    if(i%4===0){
+      line.style.animation = 'codeFlow 25s linear infinite, floatVertical 8s ease-in-out infinite';
+      line.style.animationDelay = Math.random()*30+'s, '+Math.random()*8+'s';
+    }
+    container.appendChild(line);
+  }
+}
+createCodeBackground();
+
+// Optional: refresh background periodically
+</script>
 </body>
 </html>
