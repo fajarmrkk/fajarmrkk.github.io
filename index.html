@@ -892,6 +892,26 @@
             color: var(--text-light);
             transition: var(--transition);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(6, 214, 160, 0.1) 0%, rgba(6, 214, 160, 0) 70%);
+            z-index: -1;
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .contact-info:hover::before {
+            opacity: 1;
+            transform: scale(1.2);
         }
 
         body.light .contact-info {
@@ -910,6 +930,26 @@
             color: var(--text-light);
             transition: var(--transition);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-form::before {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0) 70%);
+            z-index: -1;
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .contact-form:hover::before {
+            opacity: 1;
+            transform: scale(1.2);
         }
 
         body.light .contact-form {
@@ -952,6 +992,7 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            transform: translateX(0);
         }
 
         .contact-item::before {
@@ -986,8 +1027,7 @@
         }
 
         .contact-item:hover .contact-icon {
-            background: var(--accent-color);
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(5deg);
             box-shadow: 0 5px 15px rgba(6, 214, 160, 0.3);
         }
 
@@ -1005,6 +1045,7 @@
             flex-shrink: 0;
             position: relative;
             z-index: 1;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         body.light .contact-icon {
@@ -1059,10 +1100,23 @@
             font-size: 0.9rem;
             color: #cbd5e1;
             user-select: none;
+            animation: pulse 2s infinite;
         }
 
         body.light .contact-note {
             color: #334155;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(6, 214, 160, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(6, 214, 160, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(6, 214, 160, 0);
+            }
         }
 
         /* Social Media Bar */
@@ -1097,6 +1151,28 @@
             color: white;
             font-size: 1.2rem;
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+            z-index: -1;
+        }
+
+        .social-icon:hover::before {
+            width: 100%;
+            height: 100%;
         }
 
         .social-icon.instagram {
@@ -1112,7 +1188,7 @@
         }
 
         .social-icon:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.1);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
@@ -1144,6 +1220,7 @@
             border-color: var(--primary-color);
             background: rgba(255, 255, 255, 0.15);
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+            transform: translateY(-2px);
         }
 
         body.light .form-control:focus {
@@ -1166,6 +1243,8 @@
         .form-check-input {
             margin-top: 5px;
             margin-right: 10px;
+            transform: scale(1.2);
+            accent-color: var(--primary-color);
         }
 
         .form-check-label {
@@ -1181,10 +1260,12 @@
             color: var(--accent-color);
             text-decoration: none;
             font-weight: 500;
+            transition: var(--transition);
         }
 
         .privacy-link:hover {
             text-decoration: underline;
+            color: var(--primary-color);
         }
 
         /* Response Guarantee */
@@ -1208,6 +1289,8 @@
             color: #cbd5e1;
             font-size: 0.9rem;
             transition: var(--transition);
+            position: relative;
+            z-index: 1;
         }
 
         body.light .guarantee-item {
@@ -1218,10 +1301,16 @@
             font-size: 1.5rem;
             color: var(--accent-color);
             margin-bottom: 8px;
+            transition: var(--transition);
         }
 
         .guarantee-item:hover {
             transform: translateY(-5px);
+        }
+
+        .guarantee-item:hover i {
+            transform: scale(1.2);
+            color: var(--primary-color);
         }
 
         /* Animasi untuk form submission */
@@ -1262,11 +1351,11 @@
             margin-top: 20px;
             color: var(--accent-color);
             text-align: center;
+            animation: fadeIn 0.5s ease;
         }
 
         .form-success-message.show {
             display: block;
-            animation: fadeIn 0.5s ease;
         }
 
         @keyframes fadeIn {
