@@ -1605,16 +1605,52 @@
         }
         
         @media (max-width: 768px) {
+            /* Perbaikan tampilan header di mobile */
+            header {
+                padding: 0 15px;
+                height: 60px;
+            }
+
+            nav {
+                justify-content: space-between;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            /* Mengatur kontainer untuk toggle dan menu button */
+            .header-controls {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .lang-toggle {
+                margin-left: 0;
+                padding: 5px 10px;
+                font-size: 0.8rem;
+            }
+
+            .dark-toggle {
+                margin-left: 0;
+                font-size: 1.4rem;
+            }
+
+            .menu-toggle {
+                margin-left: 10px;
+            }
+            
             .menu-toggle {
                 display: block;
             }
             
             .nav-links {
                 position: fixed;
-                top: 70px;
+                top: 60px;
                 left: -100%;
                 width: 100%;
-                height: calc(100vh - 70px);
+                height: calc(100vh - 60px);
                 background: var(--dark-bg);
                 flex-direction: column;
                 align-items: center;
@@ -1637,7 +1673,7 @@
             
             .hero {
                 text-align: center;
-                padding-top: 100px;
+                padding-top: 80px;
             }
             
             .hero-image {
@@ -1695,6 +1731,52 @@
                 left: 10px;
                 right: 10px;
                 max-width: none;
+            }
+            
+            /* Perbaikan tampilan portofolio di mobile */
+            .portfolio-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1000;
+                border-radius: 0;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
+            }
+
+            .portfolio-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            /* Tombol tutup overlay untuk mobile */
+            .portfolio-overlay .close-overlay {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                cursor: pointer;
+                z-index: 10;
+            }
+
+            body.light .portfolio-overlay .close-overlay {
+                background: rgba(0, 0, 0, 0.2);
+                color: var(--text-dark);
+            }
+            
+            /* Nonaktifkan hover effect di mobile */
+            .portfolio-item:hover .portfolio-overlay {
+                opacity: 0;
             }
         }
         
@@ -1763,7 +1845,7 @@
                     <li><a href="#testimonials" data-id="testimonials">Testimoni</a></li>
                     <li><a href="#contact" data-id="contact">Kontak</a></li>
                 </ul>
-                <div style="display: flex; align-items: center;">
+                <div class="header-controls">
                     <button class="lang-toggle" id="langToggle" title="Toggle Language">ID</button>
                     <button class="dark-toggle" id="darkToggle" aria-label="Toggle Dark Mode" title="Toggle Dark Mode">
                         <i class="fas fa-moon"></i>
@@ -2858,6 +2940,55 @@
 
             // Jalankan animasi skill bars
             setTimeout(animateSkillBars, 500);
+            
+            // Handle portfolio item click on mobile
+            const portfolioItemsMobile = document.querySelectorAll('.portfolio-item');
+            portfolioItemsMobile.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    // Only for mobile view
+                    if (window.innerWidth <= 768) {
+                        // Check if the click is on the overlay links (to prevent conflict)
+                        if (e.target.closest('.portfolio-links')) {
+                            return;
+                        }
+
+                        const overlay = this.querySelector('.portfolio-overlay');
+                        if (overlay) {
+                            // Toggle active class
+                            overlay.classList.toggle('active');
+
+                            // If overlay is active, prevent body scroll
+                            if (overlay.classList.contains('active')) {
+                                document.body.style.overflow = 'hidden';
+                            } else {
+                                document.body.style.overflow = '';
+                            }
+                        }
+                    }
+                });
+            });
+
+            // Close overlay when clicking the close button (for mobile)
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.close-overlay')) {
+                    const overlay = e.target.closest('.portfolio-overlay');
+                    if (overlay) {
+                        overlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                }
+            });
+
+            // Add close button to portfolio overlays for mobile
+            portfolioItemsMobile.forEach(item => {
+                const overlay = item.querySelector('.portfolio-overlay');
+                if (overlay && !overlay.querySelector('.close-overlay')) {
+                    const closeBtn = document.createElement('div');
+                    closeBtn.className = 'close-overlay';
+                    closeBtn.innerHTML = '<i class="fas fa-times"></i>';
+                    overlay.appendChild(closeBtn);
+                }
+            });
         });
 
         // Back to top button
