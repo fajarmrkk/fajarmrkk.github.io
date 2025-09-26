@@ -296,6 +296,7 @@
             align-items: center;
             gap: 15px;
             margin-left: auto;
+            padding: 0 10px;
         }
 
         /* Dark mode toggle button */
@@ -309,6 +310,7 @@
             transition: var(--transition);
             display: flex;
             align-items: center;
+            padding: 5px;
         }
         body.light .dark-toggle {
             color: var(--text-dark);
@@ -331,6 +333,7 @@
             transition: var(--transition);
             display: flex;
             align-items: center;
+            margin-right: 10px;
         }
         body.light .lang-toggle {
             color: var(--text-dark);
@@ -1623,10 +1626,12 @@
 
             .logo {
                 font-size: 1.5rem;
+                margin-right: 10px;
             }
 
             .header-controls {
                 gap: 10px;
+                margin-left: 0;
             }
 
             .lang-toggle {
@@ -1735,6 +1740,92 @@
                 right: 10px;
                 max-width: none;
             }
+            
+            /* Portfolio Section - PERBAIKAN MOBILE */
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .portfolio-item {
+                max-width: 100%;
+            }
+            
+            .portfolio-image {
+                height: 180px;
+            }
+            
+            /* Portfolio Overlay - PERBAIKAN MOBILE */
+            .portfolio-overlay {
+                padding: 15px;
+            }
+            
+            .portfolio-overlay h3 {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+            
+            .portfolio-overlay p {
+                font-size: 0.9rem;
+                margin-bottom: 15px;
+            }
+            
+            .portfolio-links {
+                gap: 10px;
+            }
+            
+            .portfolio-link {
+                width: 40px;
+                height: 40px;
+            }
+            
+            /* Portfolio Detail Modal - PERBAIKAN MOBILE */
+            .portfolio-modal {
+                padding: 0;
+            }
+            
+            .modal-container {
+                max-width: 100%;
+                height: 100%;
+                border-radius: 0;
+                overflow-y: auto;
+            }
+            
+            .modal-header {
+                height: 200px;
+            }
+            
+            .modal-content {
+                padding: 20px;
+            }
+            
+            .modal-title {
+                font-size: 1.5rem;
+            }
+            
+            .modal-details {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .gallery-item {
+                height: 120px;
+            }
+            
+            .modal-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .modal-link {
+                width: 100%;
+                justify-content: center;
+            }
         }
         
         @media (max-width: 576px) {
@@ -1775,6 +1866,10 @@
             
             .gallery-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .gallery-item {
+                height: 150px;
             }
         }
     </style>
