@@ -855,19 +855,34 @@
             color: var(--accent-color);
         }
         
-        /* Contact Section */
+        /* Contact Section - PERBAIKAN */
         .contact {
             background: var(--section-bg);
             color: var(--text-light);
+            position: relative;
+            overflow: hidden;
         }
-        
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M0,0 L100,100 M100,0 L0,100" stroke="rgba(255,255,255,0.03)" stroke-width="1"/></svg>');
+            z-index: -1;
+        }
+
         .contact-content {
             display: flex;
             gap: 50px;
             align-items: flex-start;
             user-select: none;
+            position: relative;
+            z-index: 1;
         }
-        
+
         .contact-info {
             flex: 1;
             background: var(--card-bg);
@@ -876,11 +891,14 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--text-light);
             transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
+
         body.light .contact-info {
             background: var(--card-bg);
             color: var(--text-dark);
             border: 1px solid rgba(30, 41, 59, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
 
         .contact-form {
@@ -891,50 +909,88 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--text-light);
             transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
+
         body.light .contact-form {
             background: var(--card-bg);
             color: var(--text-dark);
             border: 1px solid rgba(30, 41, 59, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
-        
+
         .contact-info h3,
         .form-title {
             font-size: 1.5rem;
             margin-bottom: 30px;
             color: var(--accent-color);
             text-align: center;
+            position: relative;
         }
-        
+
+        .contact-info h3::after,
+        .form-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
         .contact-item {
             display: flex;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             transition: var(--transition);
             padding: 15px;
             border-radius: 10px;
             background: var(--contact-item-bg);
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
-        
+
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(6, 214, 160, 0.2), transparent);
+            transition: var(--transition);
+        }
+
+        .contact-item:hover::before {
+            left: 100%;
+        }
+
         .contact-item:hover {
             transform: translateX(10px);
             background: rgba(6, 214, 160, 0.15);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         .contact-item a {
             text-decoration: none;
             color: inherit;
             display: flex;
             align-items: center;
             width: 100%;
+            position: relative;
+            z-index: 1;
         }
-        
+
         .contact-item:hover .contact-icon {
             background: var(--accent-color);
             transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(6, 214, 160, 0.3);
         }
-        
+
         .contact-icon {
             width: 60px;
             height: 60px;
@@ -947,34 +1003,52 @@
             font-size: 1.5rem;
             transition: var(--transition);
             flex-shrink: 0;
+            position: relative;
+            z-index: 1;
         }
+
         body.light .contact-icon {
             background: var(--primary-color);
         }
-        
+
+        /* Ikon khusus untuk WhatsApp dan Instagram */
+        .whatsapp-icon {
+            background: #25D366;
+        }
+
+        .instagram-icon {
+            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+        }
+
+        .email-icon {
+            background: #EA4335;
+        }
+
         .contact-details h4 {
             margin-bottom: 5px;
             color: var(--text-light);
             font-size: 1.1rem;
         }
+
         body.light .contact-details h4 {
             color: var(--text-dark);
         }
-        
+
         .contact-details p {
             margin-bottom: 0;
             color: #cbd5e1;
             transition: var(--transition);
             font-size: 1rem;
         }
+
         body.light .contact-details p {
             color: #475569;
         }
-        
+
         .contact-item:hover .contact-details p {
             color: var(--accent-color);
         }
-        
+
         .contact-note {
             text-align: center;
             margin-top: 30px;
@@ -986,14 +1060,68 @@
             color: #cbd5e1;
             user-select: none;
         }
+
         body.light .contact-note {
             color: #334155;
         }
-        
-        .form-group {
-            margin-bottom: 25px;
+
+        /* Social Media Bar */
+        .social-media-bar {
+            margin-top: 30px;
+            text-align: center;
         }
-        
+
+        .social-media-bar h4 {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        body.light .social-media-bar h4 {
+            color: var(--text-dark);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-icon.instagram {
+            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+        }
+
+        .social-icon.github {
+            background: #333;
+        }
+
+        .social-icon.linkedin {
+            background: #0077B5;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Form Improvements */
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
         .form-control {
             width: 100%;
             padding: 15px;
@@ -1004,24 +1132,152 @@
             font-size: 1rem;
             transition: var(--transition);
         }
+
         body.light .form-control {
             background: rgba(0, 0, 0, 0.05);
             border: 1px solid rgba(30, 41, 59, 0.2);
             color: var(--text-dark);
         }
-        
+
         .form-control:focus {
             outline: none;
             border-color: var(--primary-color);
             background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
         }
+
         body.light .form-control:focus {
             background: rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
-        
+
         textarea.form-control {
             min-height: 150px;
             resize: vertical;
+        }
+
+        /* Form Check */
+        .form-check {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .form-check-input {
+            margin-top: 5px;
+            margin-right: 10px;
+        }
+
+        .form-check-label {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+        }
+
+        body.light .form-check-label {
+            color: #475569;
+        }
+
+        .privacy-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .privacy-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Response Guarantee */
+        .response-guarantee {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        body.light .response-guarantee {
+            border-top: 1px solid rgba(30, 41, 59, 0.2);
+        }
+
+        .guarantee-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        body.light .guarantee-item {
+            color: #475569;
+        }
+
+        .guarantee-item i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+        }
+
+        .guarantee-item:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Animasi untuk form submission */
+        .form-submitting .btn {
+            position: relative;
+            color: transparent;
+        }
+
+        .form-submitting .btn::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spinner 0.8s linear infinite;
+        }
+
+        @keyframes spinner {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Form Success Message */
+        .form-success-message {
+            display: none;
+            background: rgba(6, 214, 160, 0.2);
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            color: var(--accent-color);
+            text-align: center;
+        }
+
+        .form-success-message.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         /* Footer */
@@ -1713,7 +1969,7 @@
             }
             
             .contact-item {
-                padding: 10px;
+                padding: 12px;
             }
             
             .contact-icon {
@@ -2238,7 +2494,7 @@
         </div>
     </section>
     
-    <!-- Contact Section -->
+    <!-- Contact Section - PERBAIKAN -->
     <section class="contact" id="contact">
         <div class="container">
             <h2 data-id="contact-title">Hubungi Saya</h2>
@@ -2260,42 +2516,58 @@
                     
                     <div class="contact-item">
                         <a href="https://wa.me/6282265321264?text=Halo%20Fajar,%20saya%20tertarik%20dengan%20layanan%20Anda" target="_blank" class="contact-link">
-                            <div class="contact-icon">
+                            <div class="contact-icon whatsapp-icon">
                                 <i class="fab fa-whatsapp"></i>
                             </div>
                             <div class="contact-details">
                                 <h4 data-id="contact-whatsapp-title">WhatsApp</h4>
-                                <p data-id="contact-whatsapp-text">Wa Saya..</p>
+                                <p data-id="contact-whatsapp-text">Klik untuk chat langsung</p>
                             </div>
                         </a>
                     </div>
                     
                     <div class="contact-item">
                         <a href="https://www.instagram.com/fajarmrkk/" target="_blank" class="contact-link">
-                            <div class="contact-icon">
+                            <div class="contact-icon instagram-icon">
                                 <i class="fab fa-instagram"></i>
                             </div>
                             <div class="contact-details">
                                 <h4 data-id="contact-instagram-title">Instagram</h4>
-                                <p data-id="contact-instagram-text">Dm Saya...</p>
+                                <p data-id="contact-instagram-text">Kunjungi profil saya</p>
                             </div>
                         </a>
                     </div>
                     
                     <div class="contact-item">
                         <a href="mailto:fajarmrk@gmail.com" class="contact-link">
-                            <div class="contact-icon">
+                            <div class="contact-icon email-icon">
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <div class="contact-details">
                                 <h4 data-id="contact-email-title">Email</h4>
-                                <p data-id="contact-email-text">Hubungi Saya...</p>
+                                <p data-id="contact-email-text">fajarmrk@gmail.com</p>
                             </div>
                         </a>
                     </div>
                     
                     <div class="contact-note">
                         <p><i class="fas fa-info-circle"></i> <span data-id="contact-note">Silakan hubungi saya melalui WhatsApp untuk respon yang lebih cepat</span></p>
+                    </div>
+                    
+                    <!-- Tambahkan Social Media Bar -->
+                    <div class="social-media-bar">
+                        <h4>Ikuti Saya</h4>
+                        <div class="social-icons">
+                            <a href="https://www.instagram.com/fajarmrkk/" target="_blank" class="social-icon instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://github.com/fajarmrkk" target="_blank" class="social-icon github">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/fajar-rahmadhan/" target="_blank" class="social-icon linkedin">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 
@@ -2309,15 +2581,42 @@
                             <input type="email" class="form-control" placeholder="Alamat Email Anda" data-placeholder-en="Your Email Address" required />
                         </div>
                         <div class="form-group">
+                            <input type="tel" class="form-control" placeholder="Nomor Telepon (Opsional)" data-placeholder-en="Phone Number (Optional)" />
+                        </div>
+                        <div class="form-group">
                             <input type="text" class="form-control" placeholder="Subjek Pesan" data-placeholder-en="Message Subject" required />
                         </div>
                         <div class="form-group">
                             <textarea class="form-control" placeholder="Tulis pesan Anda di sini..." data-placeholder-en="Write your message here..." required></textarea>
                         </div>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input type="checkbox" id="privacy-check" class="form-check-input" required>
+                                <label for="privacy-check" class="form-check-label">
+                                    Saya setuju dengan <a href="#" class="privacy-link">kebijakan privasi</a> dan persyaratan layanan
+                                </label>
+                            </div>
+                        </div>
                         <button type="submit" class="btn" style="width: 100%;">
                             <i class="fas fa-paper-plane"></i> <span data-id="contact-form-submit">Kirim Pesan</span>
                         </button>
                     </form>
+                    
+                    <!-- Tambahkan jaminan respon -->
+                    <div class="response-guarantee">
+                        <div class="guarantee-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Respon dalam 24 jam</span>
+                        </div>
+                        <div class="guarantee-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Data Anda aman</span>
+                        </div>
+                        <div class="guarantee-item">
+                            <i class="fas fa-comments"></i>
+                            <span>Konsultasi gratis</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2466,11 +2765,11 @@
                 "contact-info-title": "Informasi Kontak",
                 "contact-location-title": "Lokasi",
                 "contact-whatsapp-title": "WhatsApp",
-                "contact-whatsapp-text": "Wa Saya...",
+                "contact-whatsapp-text": "Klik untuk chat langsung",
                 "contact-instagram-title": "Instagram",
-                "contact-instagram-text": "Dm Saya...",
+                "contact-instagram-text": "Kunjungi profil saya",
                 "contact-email-title": "Email",
-                "contact-email-text": "Hubungi Saya...",
+                "contact-email-text": "fajarmrk@gmail.com",
                 "contact-note": "Silakan hubungi saya melalui WhatsApp untuk respon yang lebih cepat",
                 "contact-form-title": "Kirim Pesan",
                 "contact-form-submit": "Kirim Pesan"
@@ -2523,11 +2822,11 @@
                 "contact-info-title": "Contact Information",
                 "contact-location-title": "Location",
                 "contact-whatsapp-title": "WhatsApp",
-                "contact-whatsapp-text": "Chat me...",
+                "contact-whatsapp-text": "Click to chat directly",
                 "contact-instagram-title": "Instagram",
-                "contact-instagram-text": "Dm Me...",
+                "contact-instagram-text": "Visit my profile",
                 "contact-email-title": "Email",
-                "contact-email-text": "Contact Me...",
+                "contact-email-text": "fajarmrk@gmail.com",
                 "contact-note": "Please contact me via WhatsApp for a faster response",
                 "contact-form-title": "Send Message",
                 "contact-form-submit": "Send Message"
@@ -2720,19 +3019,47 @@
           });
         });
 
-        // Contact form submission
+        // Contact form submission dengan animasi dan validasi
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
-          contactForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const currentLang = document.getElementById('langToggle').textContent;
-            if (currentLang === 'ID') {
-                alert('Terima kasih! Pesan Anda telah dikirim. Saya akan menghubungi Anda segera.');
-            } else {
-                alert('Thank you! Your message has been sent. I will contact you soon.');
-            }
-            this.reset();
-          });
+            contactForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                
+                // Tambahkan class animasi loading
+                this.classList.add('form-submitting');
+                
+                // Simulasikan proses pengiriman
+                setTimeout(() => {
+                    // Hapus class animasi loading
+                    this.classList.remove('form-submitting');
+                    
+                    // Tampilkan pesan sukses
+                    const successMessage = document.createElement('div');
+                    successMessage.className = 'form-success-message';
+                    
+                    const currentLang = document.getElementById('langToggle').textContent;
+                    if (currentLang === 'ID') {
+                        successMessage.textContent = 'Terima kasih! Pesan Anda telah dikirim. Saya akan menghubungi Anda segera.';
+                    } else {
+                        successMessage.textContent = 'Thank you! Your message has been sent. I will contact you soon.';
+                    }
+                    
+                    // Tambahkan pesan sukses ke form
+                    this.appendChild(successMessage);
+                    successMessage.classList.add('show');
+                    
+                    // Reset form
+                    this.reset();
+                    
+                    // Hapus pesan sukses setelah 5 detik
+                    setTimeout(() => {
+                        successMessage.classList.remove('show');
+                        setTimeout(() => {
+                            this.removeChild(successMessage);
+                        }, 500);
+                    }, 5000);
+                }, 1500);
+            });
         }
 
         // Dark mode toggle logic
